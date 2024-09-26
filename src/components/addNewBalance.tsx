@@ -1,29 +1,29 @@
 import { Button } from "./ui/button";
 import {
-  DialogHeader,
-  DialogFooter,
   Dialog,
-  DialogTrigger,
   DialogContent,
+  DialogFooter,
+  DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "./ui/dialog";
 
 export function AddNewBalance() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'ghost'} className="text-lg">
+        <Button variant={'ghost'} className="text-base">
           Adicionar Saldo
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-zinc-950 border border-zinc-400">
+      <DialogContent className="sm:max-w-[425px] bg-zinc-950 text-zinc-100 border border-zinc-400">
         <DialogHeader>
           <DialogTitle>Novo saldo</DialogTitle>
         </DialogHeader>
         <form action="" className="flex flex-col items-center gap-4 py-4 ">
-          <div className="flex flex-col self-start gap-2">
+          <div className="flex flex-col w-full gap-2">
             <input
-              className="bg-zinc-950 rounded-md p-2 w-60 border border-zinc-400"
+              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
               type="text"
               placeholder="Adicionar Saldo"
             />

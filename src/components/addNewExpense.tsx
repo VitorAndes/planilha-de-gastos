@@ -12,24 +12,24 @@ export function AddNewExpense() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"} className="text-lg">
+        <Button variant={"ghost"} className="text-base">
           Adicionar novo gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-zinc-950 border border-zinc-400">
+      <DialogContent className="sm:max-w-[425px] bg-zinc-950 text-zinc-100 border border-zinc-400">
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
         </DialogHeader>
         <form action="" className="flex flex-col items-center gap-4 py-4 ">
-          <div className="flex flex-col self-start gap-2">
+          <div className="flex flex-col w-full items-center gap-2">
             <input
-              className="bg-zinc-950 rounded-md p-2 w-60 border border-zinc-400"
+              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
               type="text"
               placeholder="Digite onde gastou..."
             />
             <input
-              className="bg-zinc-950 rounded-md p-2 w-60 border border-zinc-400"
-              type="text"
+              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+              type="number"
               placeholder="Digite quanto gastou..."
             />
           </div>
