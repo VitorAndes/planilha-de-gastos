@@ -1,3 +1,5 @@
+import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
+import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -8,11 +10,28 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-export function AddNewBalance() {
+type formInputType = {
+  balance: string;
+};
+
+interface AddNewBalanceProps {
+  updateBalance: (newBalance: number) => void; // Adiciona a prop
+}
+
+export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
+  const { register, handleSubmit, reset } = useForm<formInputType>();
+
+  const onSubmit = (data: formInputType) => {
+    handleNewBalance(data.balance);
+    updateBalance(Number(data.balance));
+    // console.log(data.balance);
+    reset();
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={'ghost'} className="text-base">
+        <Button variant={"ghost"} className="text-base">
           Adicionar Saldo
         </Button>
       </DialogTrigger>
@@ -20,12 +39,16 @@ export function AddNewBalance() {
         <DialogHeader>
           <DialogTitle>Novo saldo</DialogTitle>
         </DialogHeader>
-        <form action="" className="flex flex-col items-center gap-4 py-4 ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center gap-4 py-4 "
+        >
           <div className="flex flex-col w-full gap-2">
             <input
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
               type="text"
               placeholder="Adicionar Saldo"
+              {...register("balance")}
             />
           </div>
           <DialogFooter className="w-full">

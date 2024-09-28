@@ -1,3 +1,6 @@
+import { getTotalExpenses } from "@/functions/getBalanceAndExpense";
+import { handleCreateExpense } from "@/functions/handleCreateExpense";
+import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -8,7 +11,38 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-export function AddNewExpense() {
+export type ExpenseType = {
+  local: string;
+  expense: string;
+  tag: string;
+};
+
+interface AddNewExpenseProps {
+  setExpense: React.Dispatch<React.SetStateAction<number>>;
+  updateBalance: (newExpense: number) => void;
+  addNewExpense: (newExpense: ExpenseType) => void;
+}
+
+export function AddNewExpense({
+  updateBalance,
+  setExpense,
+  addNewExpense,
+}: AddNewExpenseProps) {
+  const { register, handleSubmit, reset } = useForm<ExpenseType>();
+
+  const onSubmit = (data: ExpenseType) => {
+    handleCreateExpense(data.tag, data.expense, data.local);
+
+    const newTotal = getTotalExpenses();
+    setExpense(newTotal);
+
+    updateBalance(Number(data.expense));
+
+    addNewExpense(data);
+
+    reset();
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,18 +54,34 @@ export function AddNewExpense() {
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
         </DialogHeader>
-        <form action="" className="flex flex-col items-center gap-4 py-4 ">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col items-center gap-4 py-4 "
+        >
           <div className="flex flex-col w-full items-center gap-2">
             <input
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
               type="text"
               placeholder="Digite onde gastou..."
+              {...register("local")}
             />
             <input
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
-              type="number"
+              type="string"
               placeholder="Digite quanto gastou..."
+              {...register("expense")}
             />
+            <select
+              id="tag"
+              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+              {...register("tag")}
+            >
+              <option value="">-- Escolha uma das opções abaixo --</option>
+              <option value="alimentação">alimentação</option>
+              <option value="uber">uber</option>
+              <option value="passe de onibus">passe de onibus</option>
+              <option value="roupa">roupa</option>
+            </select>
           </div>
           <DialogFooter className="w-full">
             <Button

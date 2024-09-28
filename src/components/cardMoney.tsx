@@ -13,7 +13,7 @@ export function CardMoney(props: CardMoneyProps) {
           <CircleDollarSign className="size-5" />{" "}
       </h1>
       <span className="flex items-center text-zinc-400">
-          {props.revenue == "Saldo" ? (
+          {props.revenue === "Saldo" ? (
             <span className="text-lime-500 font-bold"> +{props.value} $</span>
           ) : (
             <span className="text-red-500 font-bold"> -{props.value} $</span>
