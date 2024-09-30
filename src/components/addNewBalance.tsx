@@ -31,7 +31,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"} className="text-base">
+        <Button variant={"ghost"} className="text-xs md:text-base p-0">
           Adicionar Saldo
         </Button>
       </DialogTrigger>

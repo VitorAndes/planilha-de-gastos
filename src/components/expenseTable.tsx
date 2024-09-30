@@ -14,13 +14,13 @@ interface ExpenseTableProps {
 
 export function ExpenseTable({ expenses }: ExpenseTableProps) {
   return (
-    <div className="rounded-md w-[700px] border border-zinc-500">
+    <div className="rounded-md md:w-[780px] border border-zinc-500">
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[140px] text-white">Lugar</TableHead>
-            <TableHead className="w-[180px] text-white">Tag</TableHead>
-            <TableHead className="w-[140px] text-white">Gasto</TableHead>
+            <TableHead className="flex-1 text-white">Lugar</TableHead>
+            <TableHead className="flex-1 text-white">Tag</TableHead>
+            <TableHead className="flex-1 text-white">Gasto</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

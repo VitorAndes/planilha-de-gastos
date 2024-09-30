@@ -13,7 +13,7 @@ import {
 
 export type ExpenseType = {
   local: string;
-  expense: string;
+  expense: number;
   tag: string;
 };
 
@@ -36,7 +36,7 @@ export function AddNewExpense({
     const newTotal = getTotalExpenses();
     setExpense(newTotal);
 
-    updateBalance(Number(data.expense));
+    updateBalance(data.expense);
 
     addNewExpense(data);
 
@@ -46,8 +46,8 @@ export function AddNewExpense({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"ghost"} className="text-base">
-          Adicionar novo gasto
+        <Button variant={"ghost"} className="text-xs md:text-base p-0">
+          Adicionar gasto
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] bg-zinc-950 text-zinc-100 border border-zinc-400">
@@ -64,23 +64,26 @@ export function AddNewExpense({
               type="text"
               placeholder="Digite onde gastou..."
               {...register("local")}
+              required
             />
             <input
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
-              type="string"
+              type="number"
               placeholder="Digite quanto gastou..."
               {...register("expense")}
+              required
             />
             <select
               id="tag"
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
               {...register("tag")}
+              required
             >
               <option value="">-- Escolha uma das opções abaixo --</option>
               <option value="alimentação">alimentação</option>
-              <option value="uber">uber</option>
-              <option value="passe de onibus">passe de onibus</option>
-              <option value="roupa">roupa</option>
+              <option value="transporte">transporte</option>
+              <option value="assinatura">assinatura</option>
+              <option value="lazer">lazer</option>
             </select>
           </div>
           <DialogFooter className="w-full">
