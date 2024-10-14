@@ -68,13 +68,13 @@ export function AddNewExpense({
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant={"link"}
-          className="flex flex-col gap-2 text-black md:text-white md:text-base p-0 md:p-4"
+          variant={"ghost"}
+          className="flex flex-col md:gap-1 text-black md:text-white md:text-base p-8 rounded-t-xl md:rounded-xl md:p-9"
         >
           <span>
-            <CircleDollarSign size={50} />
+            <CircleDollarSign size={40} />
           </span>
-          Novo Gasto
+          Novo gasto
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[525px] bg-zinc-950 text-zinc-100 border border-zinc-400">

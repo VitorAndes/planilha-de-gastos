@@ -58,19 +58,19 @@ export function App() {
     <>
       <div className="flex flex-col text-zinc-100 p-4 items-center md:w-[1200px] min-h-screen w-full space-y-4">
         <div className="w-full space-y-3">
-          <div className="flex flex-col md:flex-row justify-between border-b md:p-4 p-2 border-zinc-700">
+          <div className="flex flex-col md:flex-row justify-between items-center border-b md:p-4 p-2 border-zinc-700">
             <h1 className="font-bold text-lg md:text-3xl">
               Planilha de gastos
             </h1>
-            <div className="flex gap-10 md:gap-7 backdrop-blur h-20 justify-center items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-white/90 md:bg-transparent w-full md:w-0">
+            <div className="flex gap-7 md:gap-2 backdrop-blur h-16 justify-between md:justify-center px-6 items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-300/20 md:bg-transparent w-full md:w-0">
               <AddNewBalance updateBalance={updateBalance} />
               <Button
                 onClick={handleResetData}
-                variant={"link"}
-                className="text-sm flex flex-col gap-2 md:text-white text-black md:text-base p-0 md:p-4"
+                variant={"ghost"}
+                className="text-sm flex flex-col md:gap-1 md:text-white text-black md:text-base p-8 rounded-t-xl md:rounded-xl md:p-9"
               >
                 <span>
-                  <RotateCwIcon size={50} />
+                  <RotateCwIcon size={40} />
                 </span>
                 Resetar
               </Button>
