@@ -2,7 +2,7 @@ import type { ExpenseType } from "@/components/addNewExpense";
 
 export function handleCreateExpense(
   tag: string,
-  expense: number,
+  expense: string,
   local: string
 ) {
   const dataExpense = localStorage.getItem("dataExpense");

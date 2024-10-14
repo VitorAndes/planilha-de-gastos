@@ -55,34 +55,40 @@ export function App() {
 
   return (
     <>
-      <div className="flex flex-col text-zinc-100 p-4 items-center md:w-[1200px] w-full h-screen space-y-4">
+      <div className="flex flex-col text-zinc-100 p-4 items-center md:w-[1200px] min-h-screen w-full space-y-4">
         <div className="w-full space-y-3">
-          <div className="flex flex-col md:flex-row justify-between border-b p-4 border-zinc-400">
+          <div className="flex flex-col md:flex-row justify-between border-b md:p-4 p-2 border-zinc-700">
             <h1 className="font-bold text-lg md:text-3xl">
               Planilha de gastos
             </h1>
-            <div className="flex gap-5 justify-center">
+            <div className="flex gap-6 md:gap-7 pt-2 backdrop-blur md:pt-0 justify-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-100/30 md:bg-transparent w-full md:w-0">
+              <AddNewBalance updateBalance={updateBalance} />
               <Button
                 onClick={handleResetData}
-                variant={"ghost"}
-                className="text-sm md:text-base"
+                variant={"link"}
+                className="text-xs md:text-white text-black md:text-base p-0 md:p-4"
               >
                 Resetar
               </Button>
-                <AddNewBalance updateBalance={updateBalance} />
-                <AddNewExpense
-                  setExpense={setExpense}
-                  updateBalance={descountBalance}
-                  addNewExpense={addNewExpense}
-                />
+              <AddNewExpense
+                setExpense={setExpense}
+                updateBalance={descountBalance}
+                addNewExpense={addNewExpense}
+              />
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row gap-2 justify-center md:p-4">
             <div className="flex flex-col flex-1 gap-2">
               <div className="flex gap-2">
-                <CardMoney revenue="Saldo" value={balance} />
-                <CardMoney revenue="Despesas" value={expense} />
+                <CardMoney
+                  revenue="Saldo"
+                  value={String(balance.toFixed(2)).replace(".", ",")}
+                />
+                <CardMoney
+                  revenue="Despesas"
+                  value={expense.toFixed(2).replace(".", ",")}
+                />
               </div>
               <CardChart />
             </div>

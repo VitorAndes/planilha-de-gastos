@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
+import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -42,7 +42,7 @@ export function CardChart() {
 
   const chartConfig = {
     expense: {
-      label: "total gasto",
+      label: "total gasto-",
     },
     alimentação: {
       label: "alimentação",
@@ -56,38 +56,53 @@ export function CardChart() {
     assinatura: {
       label: "assinatura",
     },
+    eletrônicos: {
+      label: "eletrônicos",
+    },
+    jogos: {
+      label: "jogos",
+    },
+    emergências: {
+      label: "emergências",
+    },
+    consultas_de_saúde: {
+      label: "consultas",
+    },
     outros: {
       label: "outros",
     },
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-1 flex-col bg-zinc-950 p-4 border border-zinc-500 text-zinc-100">
+    <Card className="flex flex-1 gap-2 flex-col bg-zinc-950 p-4 border border-zinc-500 text-zinc-100 shadow-white">
       <CardHeader className="items-center p-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full justify-center">
+      <CardContent className="flex flex-col p-0 h-full justify-center ">
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
             data={chartData}
+            layout="vertical"
             margin={{
-              top: 25,
+              left: 80,
             }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
+            <YAxis
               dataKey="tag"
+              type="category"
               tickLine={false}
-              tickMargin={10}
+              tickMargin={20}
               axisLine={false}
+              // tickFormatter={(value) => value.slice(0, 4)}
             />
+            <XAxis dataKey="expense" type="number" hide />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="expense" fill="#f1f5f9" radius={8}>
-              <LabelList position="top" offset={12} fontSize={12} />
+            <Bar dataKey="expense" fill="white" radius={8}>
+              <LabelList position="right" offset={12} fontSize={12} />
             </Bar>
           </BarChart>
         </ChartContainer>

@@ -14,7 +14,7 @@ interface ExpenseTableProps {
 
 export function ExpenseTable({ expenses }: ExpenseTableProps) {
   return (
-    <div className="rounded-md md:w-[780px] border border-zinc-500">
+    <div className="rounded-xl shadow shadow-white md:w-[580px] flex flex-1 h-full border border-zinc-500">
       <Table>
         <TableHeader>
           <TableRow>
@@ -24,19 +24,16 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {expenses.map((expense, index) => (
-            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+          {expenses.map(({ expense, local, tag }, index) => (
             <TableRow key={index}>
-              <TableCell className="text-zinc-400">{expense.local}</TableCell>
+              <TableCell className="text-zinc-400">{local}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  <span className="font-medium text-zinc-400">
-                    {expense.tag}
-                  </span>
+                  <span className="font-medium text-zinc-400">{tag}</span>
                 </div>
               </TableCell>
-              <TableCell className="font-medium text-red-500">
-                R$ {expense.expense}
+              <TableCell className="font-medium text-red-600">
+                R$ {expense}
               </TableCell>
             </TableRow>
           ))}
