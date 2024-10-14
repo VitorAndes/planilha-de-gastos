@@ -1,6 +1,7 @@
 import { getTotalExpenses } from "@/functions/getBalanceAndExpense";
 import { handleCreateExpense } from "@/functions/handleCreateExpense";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { CircleDollarSign } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "./ui/button";
@@ -25,10 +26,10 @@ const createUserFormSchema = z.object({
     .nonempty("Digite um local")
     .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, "Apenas letras são permitidas"),
   expense: z.string().nonempty("Digite um valor"),
-  tag: z.string().nonempty("Escolha uma tag")
+  tag: z.string().nonempty("Escolha uma tag"),
 });
 
-type createUserFormData = z.infer<typeof createUserFormSchema>
+type createUserFormData = z.infer<typeof createUserFormSchema>;
 
 interface AddNewExpenseProps {
   setExpense: React.Dispatch<React.SetStateAction<number>>;
@@ -41,7 +42,14 @@ export function AddNewExpense({
   setExpense,
   addNewExpense,
 }: AddNewExpenseProps) {
-  const { register, handleSubmit, reset, formState: {errors} } = useForm<createUserFormData>({resolver: zodResolver(createUserFormSchema)});
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<createUserFormData>({
+    resolver: zodResolver(createUserFormSchema),
+  });
 
   const onSubmit = (data: createUserFormData) => {
     handleCreateExpense(data.tag, data.expense, data.local);
@@ -59,7 +67,13 @@ export function AddNewExpense({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"link"} className="text-sm text-black md:text-white md:text-base p-0 md:p-4">
+        <Button
+          variant={"link"}
+          className="flex flex-col gap-2 text-black md:text-white md:text-base p-0 md:p-4"
+        >
+          <span>
+            <CircleDollarSign size={50} />
+          </span>
           Novo Gasto
         </Button>
       </DialogTrigger>
@@ -81,7 +95,9 @@ export function AddNewExpense({
                 {...register("local")}
                 required
               />
-              {errors.local && <span className="text-red-600">{errors.local.message}</span>}
+              {errors.local && (
+                <span className="text-red-600">{errors.local.message}</span>
+              )}
             </div>
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="expense">Quanto gastou ?</label>
@@ -92,7 +108,9 @@ export function AddNewExpense({
                 {...register("expense")}
                 required
               />
-              {errors.expense && <span className="text-red-600">{errors.expense.message}</span>}
+              {errors.expense && (
+                <span className="text-red-600">{errors.expense.message}</span>
+              )}
             </div>
             <select
               id="tag"

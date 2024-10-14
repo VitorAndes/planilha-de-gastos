@@ -1,4 +1,5 @@
 import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
+import { Wallet } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import {
@@ -31,7 +32,13 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"link"} className="text-sm text-black md:text-white md:text-base p-0 md:p-4">
+        <Button
+          variant={"link"}
+          className="text-sm flex flex-col gap-2 text-black md:text-white md:text-base p-0 md:p-4"
+        >
+          <span>
+            <Wallet size={50} />
+          </span>
           Novo Saldo
         </Button>
       </DialogTrigger>

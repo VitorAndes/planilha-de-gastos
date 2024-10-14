@@ -1,3 +1,4 @@
+import { RotateCwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { AddNewBalance } from "./components/addNewBalance";
 import { AddNewExpense, type ExpenseType } from "./components/addNewExpense";
@@ -61,13 +62,16 @@ export function App() {
             <h1 className="font-bold text-lg md:text-3xl">
               Planilha de gastos
             </h1>
-            <div className="flex gap-6 md:gap-7 pt-2 backdrop-blur md:pt-0 justify-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-100/30 md:bg-transparent w-full md:w-0">
+            <div className="flex gap-10 md:gap-7 backdrop-blur h-20 justify-center items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-white/90 md:bg-transparent w-full md:w-0">
               <AddNewBalance updateBalance={updateBalance} />
               <Button
                 onClick={handleResetData}
                 variant={"link"}
-                className="text-sm md:text-white text-black md:text-base p-0 md:p-4"
+                className="text-sm flex flex-col gap-2 md:text-white text-black md:text-base p-0 md:p-4"
               >
+                <span>
+                  <RotateCwIcon size={50} />
+                </span>
                 Resetar
               </Button>
               <AddNewExpense
