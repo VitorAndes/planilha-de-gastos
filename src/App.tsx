@@ -67,7 +67,7 @@ export function App() {
               <Button
                 onClick={handleResetData}
                 variant={"ghost"}
-                className="text-sm flex flex-col md:gap-1 md:text-white text-black md:text-base py-8 px-3 rounded-t-xl md:rounded-xl md:p-9"
+                className="text-sm flex flex-col md:gap-1 md:text-white text-black md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9"
               >
                 <span>
                   <RotateCwIcon size={40} />

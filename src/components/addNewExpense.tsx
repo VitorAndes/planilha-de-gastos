@@ -69,7 +69,7 @@ export function AddNewExpense({
       <DialogTrigger asChild>
         <Button
           variant={"ghost"}
-          className="flex flex-col md:gap-1 text-black md:text-white md:text-base py-8 px-3 rounded-t-xl md:rounded-xl md:p-9"
+          className="flex flex-col md:gap-1 text-black md:text-white md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9"
         >
           <span>
             <CircleDollarSign size={40} />
