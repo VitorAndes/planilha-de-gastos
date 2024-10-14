@@ -62,12 +62,12 @@ export function App() {
             <h1 className="font-bold text-lg md:text-3xl">
               Planilha de gastos
             </h1>
-            <div className="flex gap-7 md:gap-2 backdrop-blur h-16 justify-between md:justify-center px-6 items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-300/20 md:bg-transparent w-full md:w-0">
+            <div className="flex gap-1 px-10 md:gap-2 backdrop-blur h-16 justify-center md:justify-center items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-300/20 md:bg-transparent w-full md:w-0">
               <AddNewBalance updateBalance={updateBalance} />
               <Button
                 onClick={handleResetData}
                 variant={"ghost"}
-                className="text-sm flex flex-col md:gap-1 md:text-white text-black md:text-base p-8 rounded-t-xl md:rounded-xl md:p-9"
+                className="text-sm flex flex-col md:gap-1 md:text-white text-black md:text-base py-8 px-3 rounded-t-xl md:rounded-xl md:p-9"
               >
                 <span>
                   <RotateCwIcon size={40} />

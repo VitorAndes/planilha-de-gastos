@@ -34,7 +34,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"ghost"}
-          className="text-sm flex flex-col md:gap-1 text-black md:text-white md:text-base p-8 rounded-t-xl md:rounded-xl md:p-9"
+          className="text-sm flex flex-col md:gap-1 text-black md:text-white md:text-base py-8 px-3 rounded-t-xl md:rounded-xl md:p-9"
         >
           <span>
             <Wallet size={40} />
