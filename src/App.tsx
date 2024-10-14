@@ -56,7 +56,7 @@ export function App() {
 
   return (
     <>
-      <div className="flex flex-col text-zinc-100 p-4 items-center md:w-[1200px] min-h-screen w-full space-y-4">
+      <div className="flex flex-col text-zinc-100 p-4 pb-20 items-center md:w-[1200px] min-h-screen w-full space-y-4">
         <div className="w-full space-y-3">
           <div className="flex flex-col md:flex-row justify-between items-center border-b md:p-4 p-2 border-zinc-700">
             <h1 className="font-bold text-lg md:text-3xl">
