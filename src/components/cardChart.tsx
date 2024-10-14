@@ -85,14 +85,14 @@ export function CardChart() {
             data={chartData}
             layout="vertical"
             margin={{
-              left: 80,
+              left: 50,
             }}
           >
             <YAxis
               dataKey="tag"
               type="category"
               tickLine={false}
-              tickMargin={20}
+              tickMargin={0}
               axisLine={false}
               // tickFormatter={(value) => value.slice(0, 4)}
             />
