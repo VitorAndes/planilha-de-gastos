@@ -78,7 +78,7 @@ export function CardChart() {
       <CardHeader className="items-center p-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full justify-center ">
+      <CardContent className="flex flex-col p-0 justify-start h-full ">
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
