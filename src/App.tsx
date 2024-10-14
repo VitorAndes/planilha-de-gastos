@@ -82,7 +82,7 @@ export function App() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2 justify-center md:p-4">
+          <div className="flex flex-col md:flex-row gap-2 justify-center p-0 md:p-4">
             <div className="flex flex-col flex-1 gap-2">
               <div className="flex gap-2">
                 <CardMoney

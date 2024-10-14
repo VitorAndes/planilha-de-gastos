@@ -74,7 +74,7 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-1 gap-2 flex-col bg-zinc-950 p-4 border border-zinc-500 text-zinc-100 shadow-white">
+    <Card className="flex flex-1 gap-2 flex-col bg-zinc-950 p-2 md:p-4 border border-zinc-500 text-zinc-100 shadow-white">
       <CardHeader className="items-center p-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
