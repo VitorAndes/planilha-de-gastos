@@ -66,7 +66,7 @@ export function App() {
               <Button
                 onClick={handleResetData}
                 variant={"link"}
-                className="text-xs md:text-white text-black md:text-base p-0 md:p-4"
+                className="text-sm md:text-white text-black md:text-base p-0 md:p-4"
               >
                 Resetar
               </Button>

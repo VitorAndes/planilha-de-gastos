@@ -59,11 +59,11 @@ export function AddNewExpense({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"link"} className="text-xs text-black md:text-white md:text-base p-0 md:p-4">
+        <Button variant={"link"} className="text-sm text-black md:text-white md:text-base p-0 md:p-4">
           Novo Gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] min-w-[600px] bg-zinc-950 text-zinc-100 border border-zinc-400">
+      <DialogContent className="sm:max-w-[525px] bg-zinc-950 text-zinc-100 border border-zinc-400">
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
         </DialogHeader>
