@@ -62,7 +62,7 @@ export function App() {
             <h1 className="font-bold text-lg md:text-3xl">
               Planilha de gastos
             </h1>
-            <div className="flex gap-1 px-10 md:gap-2 backdrop-blur h-16 justify-center md:justify-center items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-300/20 md:bg-transparent w-full md:w-0">
+            <div className="flex gap-1 px-10 md:gap-2 backdrop-blur h-16 justify-center md:justify-center items-center flex-1 md:static bottom-0 left-0 fixed z-10 rounded-t-xl md:rounded=t-none bg-zinc-500/90 md:bg-transparent w-full md:w-0">
               <AddNewBalance updateBalance={updateBalance} />
               <Button
                 onClick={handleResetData}
