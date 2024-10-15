@@ -78,7 +78,7 @@ export function CardChart() {
       <CardHeader className="items-center px-4 py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full ">
+      <CardContent className="flex flex-col p-5 h-full ">
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
@@ -92,7 +92,7 @@ export function CardChart() {
               dataKey="tag"
               type="category"
               tickLine={false}
-              tickMargin={0}
+              tickMargin={2}
               axisLine={false}
               // tickFormatter={(value) => value.slice(0, 4)}
             />
