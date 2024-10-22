@@ -9,8 +9,17 @@
 }
 
 body {
-  background-image: url("./assets/bg.png")
-  
+  background-image: url("./assets/bg-mobile.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url("./assets/bg.png");
+    background-size: cover;
+    background-position: center;
+  }
 }
 
 @layer base {
@@ -66,9 +75,8 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-2: 340 75% 55%;
-    }
+  }
 }
-
 
 @layer base {
   * {
