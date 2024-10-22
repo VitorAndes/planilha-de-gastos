@@ -1,9 +1,9 @@
 import { getBalance, getTotalExpenses } from "@/functions/getBalanceAndExpense";
 import { handleCreateExpense } from "@/functions/handleCreateExpense";
-import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleDollarSign } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import {
@@ -29,7 +29,10 @@ const createUserFormSchema = z.object({
   expense: z
     .string()
     .nonempty("Digite um valor")
-    .regex(/^-?\d+([.,]\d+)?$/, 'Deve ser um número válido, utilizando vírgula ou ponto como separador decimal.'),
+    .regex(
+      /^-?\d+([.,]\d+)?$/,
+      "Deve ser um número válido, utilizando vírgula ou ponto como separador decimal."
+    ),
   tag: z.string().nonempty("Escolha uma tag"),
 });
 
@@ -50,19 +53,20 @@ export function AddNewExpense({
     register,
     handleSubmit,
     reset,
+    
     formState: { errors },
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
 
-  const { toast } = useToast()
-
   const onSubmit = (data: createUserFormData) => {
-    const balance = getBalance()
+    const balance = getBalance();
 
-    if(Number.parseFloat(data.expense.replace(",", ".")) > balance){
-      alert("não foi possivel finalizar a compra por falta de saldo.")
-      return 0
+    if (Number.parseFloat(data.expense.replace(",", ".")) > balance) {
+      toast.error("Não foi possivel finalizar a compra por falta de saldo.", {
+        className: " text-base p-5"
+      });
+      return 0;
     }
 
     handleCreateExpense(data.tag, data.expense, data.local);
@@ -73,6 +77,10 @@ export function AddNewExpense({
     updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
 
     addNewExpense(data);
+
+    toast.success("Novo gasto foi adicionado!", {
+      className: "p-5 text-base"
+    })
 
     reset();
   };
@@ -147,11 +155,7 @@ export function AddNewExpense({
           <DialogFooter className="w-full">
             <Button
               type="submit"
-              onClick={() => {
-                toast({
-                  title: "Seu novo gasto foi adicionado!"
-                })
-              }}
+              onClick={() => {}}
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
             >
               Atualizar gastos

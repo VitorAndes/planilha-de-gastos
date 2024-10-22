@@ -7,19 +7,17 @@ import { CardMoney } from "./components/cardMoney";
 import { ExpenseTable } from "./components/expenseTable";
 import { Button } from "./components/ui/button";
 
-import { Toaster } from "./components/ui/toaster";
+import { toast } from "sonner";
 import {
   getAllExpenses,
   getTotalExpenses,
 } from "./functions/getBalanceAndExpense";
-import { useToast } from "./hooks/use-toast";
 
 export function App() {
   const [balance, setBalance] = useState(0);
   const [expense, setExpense] = useState(0);
   const [expensesList, setExpensesList] = useState<ExpenseType[]>([]);
 
-  const { toast } = useToast();
 
   useEffect(() => {
     const storedBalance = localStorage.getItem("balance");
@@ -32,11 +30,15 @@ export function App() {
     setExpensesList(allExpenses);
   }, []);
 
-  const handleResetData = () => {
+  const handleResetData = () => { 
     localStorage.clear();
     setBalance(0);
     setExpense(0);
     setExpensesList([]);
+
+    toast.success("Os dados foram resetados", {
+      className: " text-base p-5"
+    })
   };
 
   const updateBalance = (newExpense: number) => {
@@ -71,12 +73,7 @@ export function App() {
               <AddNewBalance updateBalance={updateBalance} />
 
               <Button
-                onClick={async () => {
-                  await handleResetData();
-                  toast({
-                    title: "Seus dados foram resetados!",
-                  });
-                }}
+                onClick={handleResetData}
                 variant={"ghost"}
                 className="text-sm w-32 flex flex-col md:gap-1 md:text-white transition-all hover:bg-zinc-950 hover:text-white text-black md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9 md:hover:bg-zinc-100 md:hover:text-black"
               >
@@ -112,7 +109,6 @@ export function App() {
             </div>
           </div>
         </div>
-        <Toaster />
       </div>
     </>
   );

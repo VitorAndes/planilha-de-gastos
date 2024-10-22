@@ -1,8 +1,8 @@
 import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
-import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Wallet } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import {
@@ -18,7 +18,10 @@ const createUserFormSchema = z.object({
   balance: z
     .string()
     .nonempty("Digite um valor")
-    .regex(/^-?\d+([.,]\d+)?$/, "Deve ser um número válido, utilizando vírgula ou ponto como separador decimal."),
+    .regex(
+      /^-?\d+([.,]\d+)?$/,
+      "Deve ser um número válido, utilizando vírgula ou ponto como separador decimal."
+    ),
 });
 
 type createUserFormData = z.infer<typeof createUserFormSchema>;
@@ -37,11 +40,12 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
     resolver: zodResolver(createUserFormSchema),
   });
 
-  const { toast } = useToast()
-
   const onSubmit = (data: createUserFormData) => {
     handleNewBalance(data.balance);
     updateBalance(Number.parseFloat(data.balance.replace(",", ".")));
+    toast.success("Novo saldo adicionado!", {
+      className: "p-5 text-base",
+    });
     reset();
   };
 
@@ -80,11 +84,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
           <DialogFooter className="w-full">
             <Button
               type="submit"
-              onClick={() => {
-                toast({
-                  title: "Seu novo saldo foi adicionado!"
-                })
-              }}
+              onClick={() => {}}
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
             >
               Atualizar Saldo
