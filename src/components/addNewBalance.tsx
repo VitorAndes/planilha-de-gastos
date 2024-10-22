@@ -52,10 +52,10 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"ghost"}
-          className="text-sm flex flex-col md:gap-1 text-black hover:bg-zinc-950 hover:text-white w-32 transition-all md:text-white md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9 md:hover:bg-zinc-100 md:hover:text-black"
+          className="text-sm flex flex-col md:gap-1 md:text-white transition-all hover:bg-zinc-300 hover:text-black text-white md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9 md:hover:bg-zinc-100 md:hover:text-black"
         >
           <span>
-            <Wallet size={40} />
+            <Wallet size={40} className="text-lime-600" />
           </span>
           Novo saldo
         </Button>

@@ -7,7 +7,7 @@ interface CardMoneyProps {
 
 export function CardMoney(props: CardMoneyProps) {
   return (
-    <div className="flex flex-col gap-1 flex-1 border border-zinc-500 rounded-xl p-4 shadow shadow-white">
+    <div className="flex flex-col gap-1 flex-1 border border-zinc-500 bg-zinc-950/60 rounded-xl p-4 shadow shadow-white">
       <h1 className="text-lg font-medium tracking-wider flex items-center justify-between gap-2">
         {props.revenue} <CircleDollarSign className="size-5" />{" "}
       </h1>

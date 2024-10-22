@@ -7,8 +7,8 @@ import './index.css'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
-    <Toaster richColors theme='dark' expand toastOptions={{
-      className: "p-5 text-base"
+    <Toaster richColors visibleToasts={2} theme='dark' expand toastOptions={{
+      className: "p-5 text-base",
     }}/>
   </StrictMode>,
 )
