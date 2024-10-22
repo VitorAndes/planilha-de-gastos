@@ -25,7 +25,10 @@ const createUserFormSchema = z.object({
     .string()
     .nonempty("Digite um local")
     .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, "Apenas letras são permitidas"),
-  expense: z.string().nonempty("Digite um valor"),
+  expense: z
+    .string()
+    .nonempty("Digite um valor"),
+    // .regex(/^[0-9.]+$/, 'O campo deve conter apenas números e pontos.')
   tag: z.string().nonempty("Escolha uma tag"),
 });
 
@@ -57,7 +60,7 @@ export function AddNewExpense({
     const newTotal = getTotalExpenses();
     setExpense(newTotal);
 
-    updateBalance(Number(data.expense));
+    updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
 
     addNewExpense(data);
 

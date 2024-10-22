@@ -24,7 +24,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
 
   const onSubmit = (data: formInputType) => {
     handleNewBalance(data.balance);
-    updateBalance(Number(data.balance));
+    updateBalance(Number.parseFloat(data.balance.replace(',', '.')));
     // console.log(data.balance);
     reset();
   };

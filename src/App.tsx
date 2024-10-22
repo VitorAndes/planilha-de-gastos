@@ -87,7 +87,7 @@ export function App() {
               <div className="flex gap-2">
                 <CardMoney
                   revenue="Saldo"
-                  value={String(balance.toFixed(2)).replace(".", ",")}
+                  value={balance.toFixed(2).replace(".", ",")}
                 />
                 <CardMoney
                   revenue="Despesas"

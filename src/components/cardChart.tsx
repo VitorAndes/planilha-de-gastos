@@ -23,7 +23,8 @@ export function CardChart() {
     const chartData = getAllExpenses();
 
     const totals = chartData.reduce<TotalsType>((acc, item) => {
-      const expense = Number(item.expense);
+      const expense = Number.parseFloat(item.expense.replace(",", "."));
+
       if (acc[item.tag]) {
         acc[item.tag] += expense;
       } else {
@@ -42,7 +43,7 @@ export function CardChart() {
 
   const chartConfig = {
     expense: {
-      label: "total gasto-",
+      label: "total gasto - ",
     },
     alimentação: {
       label: "alimentação",
@@ -74,18 +75,18 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex flex-1 gap-2 flex-col bg-zinc-950 py-4 border border-zinc-500 text-zinc-100 shadow-white">
+    <Card className="flex flex-1 gap-2 p-4 flex-col  bg-zinc-950 py-4 border border-zinc-500 text-zinc-100 shadow-white">
       <CardHeader className="items-center px-4 py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full ">
+      <CardContent className="flex flex-col p-0 h-full justify-center ">
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
             data={chartData}
             layout="vertical"
             margin={{
-              left: 60,
+              left: 40,
             }}
           >
             <YAxis
@@ -94,7 +95,6 @@ export function CardChart() {
               tickLine={false}
               tickMargin={2}
               axisLine={false}
-              // tickFormatter={(value) => value.slice(0, 4)}
             />
             <XAxis dataKey="expense" type="number" hide />
             <ChartTooltip

@@ -8,8 +8,8 @@ export function getBalance() {
 export function getTotalExpenses(): number {
   const dataExpense = localStorage.getItem("dataExpense");
   const DataExpense: ExpenseType[] = dataExpense ? JSON.parse(dataExpense) : [];
-  return DataExpense.reduce((acc, item) => acc + Number(item.expense), 0);
-}
+  return DataExpense.reduce((acc, item) => acc + Number.parseFloat(item.expense.replace(",", ".")), 0);
+} 
 
 export function getAllExpenses(): ExpenseType[] {
   const dataExpense = localStorage.getItem("dataExpense");
