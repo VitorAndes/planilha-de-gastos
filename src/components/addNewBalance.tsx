@@ -1,4 +1,5 @@
 import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Wallet } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -35,6 +36,8 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
+
+  const { toast } = useToast()
 
   const onSubmit = (data: createUserFormData) => {
     handleNewBalance(data.balance);
@@ -77,6 +80,11 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
           <DialogFooter className="w-full">
             <Button
               type="submit"
+              onClick={() => {
+                toast({
+                  title: "Seu novo saldo foi adicionado!"
+                })
+              }}
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
             >
               Atualizar Saldo

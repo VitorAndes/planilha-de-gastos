@@ -1,5 +1,6 @@
 import { getBalance, getTotalExpenses } from "@/functions/getBalanceAndExpense";
 import { handleCreateExpense } from "@/functions/handleCreateExpense";
+import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleDollarSign } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -53,6 +54,8 @@ export function AddNewExpense({
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
+
+  const { toast } = useToast()
 
   const onSubmit = (data: createUserFormData) => {
     const balance = getBalance()
@@ -144,6 +147,11 @@ export function AddNewExpense({
           <DialogFooter className="w-full">
             <Button
               type="submit"
+              onClick={() => {
+                toast({
+                  title: "Seu novo gasto foi adicionado!"
+                })
+              }}
               className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
             >
               Atualizar gastos
