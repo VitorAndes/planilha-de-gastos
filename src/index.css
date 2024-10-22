@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url("./assets/bg.png")
+  
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
