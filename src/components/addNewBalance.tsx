@@ -43,9 +43,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
   const onSubmit = (data: createUserFormData) => {
     handleNewBalance(data.balance);
     updateBalance(Number.parseFloat(data.balance.replace(",", ".")));
-    toast.success("Novo saldo adicionado!", {
-      className: "p-5 text-base",
-    });
+    toast.success("Novo saldo adicionado!");
     reset();
   };
 

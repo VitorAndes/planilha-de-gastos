@@ -63,9 +63,7 @@ export function AddNewExpense({
     const balance = getBalance();
 
     if (Number.parseFloat(data.expense.replace(",", ".")) > balance) {
-      toast.error("Não foi possivel finalizar a compra por falta de saldo.", {
-        className: " text-base p-5"
-      });
+      toast.error("Não foi possivel finalizar a compra por falta de saldo.");
       return 0;
     }
 
@@ -78,9 +76,7 @@ export function AddNewExpense({
 
     addNewExpense(data);
 
-    toast.success("Novo gasto foi adicionado!", {
-      className: "p-5 text-base"
-    })
+    toast.success("Novo gasto foi adicionado!")
 
     reset();
   };

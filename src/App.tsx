@@ -36,9 +36,7 @@ export function App() {
     setExpense(0);
     setExpensesList([]);
 
-    toast.success("Os dados foram resetados", {
-      className: " text-base p-5"
-    })
+    toast.success("Os dados foram resetados")
   };
 
   const updateBalance = (newExpense: number) => {
