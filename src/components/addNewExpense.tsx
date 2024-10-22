@@ -1,4 +1,4 @@
-import { getTotalExpenses } from "@/functions/getBalanceAndExpense";
+import { getBalance, getTotalExpenses } from "@/functions/getBalanceAndExpense";
 import { handleCreateExpense } from "@/functions/handleCreateExpense";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleDollarSign } from "lucide-react";
@@ -27,8 +27,8 @@ const createUserFormSchema = z.object({
     .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, "Apenas letras são permitidas"),
   expense: z
     .string()
-    .nonempty("Digite um valor"),
-    // .regex(/^[0-9.]+$/, 'O campo deve conter apenas números e pontos.')
+    .nonempty("Digite um valor")
+    .regex(/^-?\d+([.,]\d+)?$/, 'Deve ser um número válido, utilizando vírgula ou ponto como separador decimal.'),
   tag: z.string().nonempty("Escolha uma tag"),
 });
 
@@ -55,6 +55,13 @@ export function AddNewExpense({
   });
 
   const onSubmit = (data: createUserFormData) => {
+    const balance = getBalance()
+
+    if(Number.parseFloat(data.expense.replace(",", ".")) > balance){
+      alert("não foi possivel finalizar a compra por falta de saldo.")
+      return 0
+    }
+
     handleCreateExpense(data.tag, data.expense, data.local);
 
     const newTotal = getTotalExpenses();

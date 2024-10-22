@@ -1,6 +1,8 @@
 import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Wallet } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { Button } from "./ui/button";
 import {
   Dialog,
@@ -11,21 +13,32 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 
-type formInputType = {
-  balance: string;
-};
+const createUserFormSchema = z.object({
+  balance: z
+    .string()
+    .nonempty("Digite um valor")
+    .regex(/^-?\d+([.,]\d+)?$/, "Deve ser um número válido, utilizando vírgula ou ponto como separador decimal."),
+});
+
+type createUserFormData = z.infer<typeof createUserFormSchema>;
 
 interface AddNewBalanceProps {
-  updateBalance: (newBalance: number) => void; // Adiciona a prop
+  updateBalance: (newBalance: number) => void;
 }
 
 export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
-  const { register, handleSubmit, reset } = useForm<formInputType>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<createUserFormData>({
+    resolver: zodResolver(createUserFormSchema),
+  });
 
-  const onSubmit = (data: formInputType) => {
+  const onSubmit = (data: createUserFormData) => {
     handleNewBalance(data.balance);
-    updateBalance(Number.parseFloat(data.balance.replace(',', '.')));
-    // console.log(data.balance);
+    updateBalance(Number.parseFloat(data.balance.replace(",", ".")));
     reset();
   };
 
@@ -57,6 +70,9 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
               placeholder="Adicionar Saldo"
               {...register("balance")}
             />
+            {errors.balance && (
+              <span className="text-red-600">{errors.balance.message}</span>
+            )}
           </div>
           <DialogFooter className="w-full">
             <Button
