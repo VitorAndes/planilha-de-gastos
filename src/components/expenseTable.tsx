@@ -34,7 +34,7 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
                 </div>
               </TableCell>
               <TableCell className="font-medium text-red-600">
-                R$ {expense}
+                R$ {expense.replace(".", ",")}
               </TableCell>
             </TableRow>
           ))}

@@ -1,6 +1,12 @@
 "use client";
 
-import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  LabelList,
+  XAxis,
+  YAxis
+} from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -22,10 +28,10 @@ export function CardChart() {
   useEffect(() => {
     const interval = setInterval(() => {
       const chartData = getAllExpenses();
-  
+
       const totals = chartData.reduce<TotalsType>((acc, item) => {
         const expense = Number.parseFloat(item.expense.replace(",", "."));
-  
+
         if (acc[item.tag]) {
           acc[item.tag] += expense;
         } else {
@@ -77,12 +83,12 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white">
+    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white h-full">
       <CardHeader className="items-center py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full">
-        <ChartContainer config={chartConfig}>
+      <CardContent className="h-full">
+        <ChartContainer config={chartConfig} className="h-full w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -104,7 +110,11 @@ export function CardChart() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Bar dataKey="expense" fill="white" radius={20}>
-              <LabelList position="center" fontSize={18} style={{ fill: 'black' }} />
+              <LabelList
+                position="center"
+                fontSize={18}
+                style={{ fill: "black" }}
+              />
             </Bar>
           </BarChart>
         </ChartContainer>
