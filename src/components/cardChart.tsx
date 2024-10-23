@@ -20,20 +20,22 @@ export function CardChart() {
   const [totals, setTotals] = useState<TotalsType>({});
 
   useEffect(() => {
-    const chartData = getAllExpenses();
-
-    const totals = chartData.reduce<TotalsType>((acc, item) => {
-      const expense = Number.parseFloat(item.expense.replace(",", "."));
-
-      if (acc[item.tag]) {
-        acc[item.tag] += expense;
-      } else {
-        acc[item.tag] = expense;
-      }
-      return acc;
-    }, {});
-
-    setTotals(totals);
+    const interval = setInterval(() => {
+      const chartData = getAllExpenses();
+  
+      const totals = chartData.reduce<TotalsType>((acc, item) => {
+        const expense = Number.parseFloat(item.expense.replace(",", "."));
+  
+        if (acc[item.tag]) {
+          acc[item.tag] += expense;
+        } else {
+          acc[item.tag] = expense;
+        }
+        return acc;
+      }, {});
+      setTotals(totals);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   const chartData = Object.entries(totals).map(([tag, expense]) => ({
@@ -76,10 +78,10 @@ export function CardChart() {
 
   return (
     <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white">
-      <CardHeader className="items-center px-4 py-0">
+      <CardHeader className="items-center py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col p-0 h-full ">
+      <CardContent className="flex flex-col p-0 h-full">
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
@@ -93,7 +95,7 @@ export function CardChart() {
               dataKey="tag"
               type="category"
               tickLine={false}
-              tickMargin={2}
+              tickMargin={5}
               axisLine={false}
             />
             <XAxis dataKey="expense" type="number" hide />
@@ -101,8 +103,8 @@ export function CardChart() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="expense" fill="white" radius={8}>
-              <LabelList position="right" offset={12} fontSize={12} />
+            <Bar dataKey="expense" fill="white" radius={20}>
+              <LabelList position="center" fontSize={18} style={{ fill: 'black' }} />
             </Bar>
           </BarChart>
         </ChartContainer>
