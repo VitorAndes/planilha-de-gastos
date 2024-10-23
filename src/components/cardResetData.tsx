@@ -28,12 +28,11 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
           Resetar
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] bg-zinc-950 text-zinc-100 border border-zinc-400">
+      <DialogContent className="sm:max-w-[525px] space-y-4 bg-zinc-950 text-zinc-100 border border-zinc-400">
         <DialogHeader>
           <DialogTitle>Tem certeza que deseja resetar os dados?</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col items-center gap-4 py-4 ">
-          <DialogFooter className="w-full">
+          <DialogFooter className="flex gap-2 w-full">
             <DialogClose
               className="bg-red-600 hover:bg-red-500 rounded-md p-2 w-full border border-zinc-400"
             >
@@ -47,7 +46,6 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
               Sim
             </DialogClose>
           </DialogFooter>
-        </div>
       </DialogContent>
     </Dialog>
   );
