@@ -29,18 +29,25 @@ export function CardChart() {
     const interval = setInterval(() => {
       const chartData = getAllExpenses();
 
-      const totals = chartData.reduce<TotalsType>((acc, item) => {
-        const expense = Number.parseFloat(item.expense.replace(",", "."));
+      const expenseData = chartData.reduce<TotalsType>((acc, product) => {
+        const formattedExpense = product.expense.replace(",", ".")
+        const expense = Number.parseFloat(formattedExpense);
 
-        if (acc[item.tag]) {
-          acc[item.tag] += expense;
+        if (acc[product.tag]) {
+          acc[product.tag] += expense;
+          
         } else {
-          acc[item.tag] = expense;
+          acc[product.tag] = expense;
         }
         return acc;
       }, {});
-      setTotals(totals);
-    }, 4000);
+
+      for (const tag in expenseData) {
+        expenseData[tag] = Number.parseFloat(expenseData[tag].toFixed(2));
+      }
+
+      setTotals(expenseData);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
