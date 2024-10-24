@@ -90,11 +90,11 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white">
+    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white md:h-full">
       <CardHeader className="items-center py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-[400px] w-[400px]">
+      <CardContent className="h-[400px] w-[320px] md:h-full md:w-full">
         <ChartContainer config={chartConfig} className="h-full w-full">
           <BarChart
             accessibilityLayer
@@ -116,10 +116,10 @@ export function CardChart() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="expense" fill="white" radius={20}>
+            <Bar dataKey="expense" fill="white" radius={10}>
               <LabelList
                 position="center"
-                fontSize={18}
+                fontSize={14}
                 style={{ fill: "black" }}
               />
             </Bar>
