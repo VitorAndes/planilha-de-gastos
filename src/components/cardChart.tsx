@@ -94,8 +94,8 @@ export function CardChart() {
       <CardHeader className="items-center py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-[400px]">
-        <ChartContainer config={chartConfig} className="h-full w-[350px]">
+      <CardContent className="h-[400px] w-[400px]">
+        <ChartContainer config={chartConfig} className="h-full w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
