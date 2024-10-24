@@ -65,7 +65,7 @@ export function App() {
             <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-r from-zinc-300 via-lime-500 to-red-600 bg-clip-text text-transparent">
               Planilha de gastos
             </h1>
-            <div className="flex gap-5 px-2 py-9 md:gap-2 h-16 justify-center items-center flex-1 md:static bottom-1 fixed z-10 rounded-full md:rounded=t-none bg-zinc-900/80 md:bg-transparent min-w-[320px] md:w-0">
+            <div className="flex gap-5 px-2 py-10 md:gap-2 h-16 justify-center items-center flex-1 md:static bottom-0 fixed z-10 rounded-t-2xl md:rounded=t-none bg-zinc-950/90 border-t-zinc-300 border-t backdrop-blur md:bg-transparent min-w-[320px] md:w-0">
               <AddNewBalance updateBalance={updateBalance} />
 
               <CardResetData handleResetData={handleResetData}/>
