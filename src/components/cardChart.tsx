@@ -44,7 +44,7 @@ export function CardChart() {
 
       for (const tag in expenseData) {
         expenseData[tag] = Number.parseFloat(expenseData[tag].toFixed(2));
-      }
+      } 
 
       setTotals(expenseData);
     }, 5000);
@@ -90,12 +90,12 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white h-full">
+    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white">
       <CardHeader className="items-center py-0">
         <CardTitle>Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-full">
-        <ChartContainer config={chartConfig} className="h-full w-full">
+      <CardContent className="h-[400px]">
+        <ChartContainer config={chartConfig} className="h-full w-[350px]">
           <BarChart
             accessibilityLayer
             data={chartData}
