@@ -70,7 +70,13 @@ export function App() {
           <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-b from-zinc-600 via-lime-600 to-red-600 bg-clip-text text-transparent">
             Planilha de gastos
           </h1>
-          <div className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/70 border-t-zinc-300 border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none lg:bg- w-full lg:w-0">
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: .7 }}
+            className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/70 border-t-zinc-300 border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none lg:bg- w-full lg:w-0"
+          >
             <AddNewBalance updateBalance={updateBalance} />
             <CardResetData handleResetData={handleResetData} />
             <AddNewExpense
@@ -78,7 +84,7 @@ export function App() {
               updateBalance={descountBalance}
               addNewExpense={addNewExpense}
             />
-          </div>
+          </motion.div>
         </motion.div>
 
         <div className="flex flex-col md:flex-wrap md:flex-row gap-3 p-0 md:p-4 w-full">
