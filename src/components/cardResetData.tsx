@@ -28,7 +28,7 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
           Resetar
         </Button>
       </DialogTrigger>
-      <DialogContent className="md:max-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur p-8 space-y-6">
+      <DialogContent className="max-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur p-8 space-y-6">
         <DialogHeader>
           <DialogTitle>Tem certeza que deseja resetar os dados?</DialogTitle>
         </DialogHeader>

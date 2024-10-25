@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Bar,
-  BarChart,
-  LabelList,
-  XAxis,
-  YAxis
-} from "recharts";
+import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -17,6 +11,7 @@ import {
 } from "@/components/ui/chart";
 import { getAllExpenses } from "@/functions/getBalanceAndExpense";
 import { useEffect, useState } from "react";
+import { LoadingSpinner } from "./isLoading";
 
 interface TotalsType {
   [tag: string]: number;
@@ -24,18 +19,18 @@ interface TotalsType {
 
 export function CardChart() {
   const [totals, setTotals] = useState<TotalsType>({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
       const chartData = getAllExpenses();
 
       const expenseData = chartData.reduce<TotalsType>((acc, product) => {
-        const formattedExpense = product.expense.replace(",", ".")
+        const formattedExpense = product.expense.replace(",", ".");
         const expense = Number.parseFloat(formattedExpense);
 
         if (acc[product.tag]) {
           acc[product.tag] += expense;
-          
         } else {
           acc[product.tag] = expense;
         }
@@ -44,8 +39,8 @@ export function CardChart() {
 
       for (const tag in expenseData) {
         expenseData[tag] = Number.parseFloat(expenseData[tag].toFixed(2));
-      } 
-
+      }
+      setIsLoading(false);
       setTotals(expenseData);
     }, 5000);
     return () => clearInterval(interval);
@@ -95,36 +90,40 @@ export function CardChart() {
         <CardTitle className="text-lg">Total de gastos</CardTitle>
       </CardHeader>
       <CardContent className="h-[400px] md:h-full md:w-full p-0">
-        <ChartContainer config={chartConfig} className="h-full w-full">
-          <BarChart
-            accessibilityLayer
-            data={chartData}
-            layout="vertical"
-            margin={{
-              left: 60,
-            }}
-          >
-            <YAxis
-              dataKey="tag"
-              type="category"
-              tickLine={false}
-              tickMargin={5}
-              axisLine={false}
-            />
-            <XAxis dataKey="expense" type="number" hide />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent hideLabel />}
-            />
-            <Bar dataKey="expense" fill="white" radius={10}>
-              <LabelList
-                position="center"
-                fontSize={17}
-                style={{ fill: "black" }}
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <ChartContainer config={chartConfig} className="h-full w-full">
+            <BarChart
+              accessibilityLayer
+              data={chartData}
+              layout="vertical"
+              margin={{
+                left: 60,
+              }}
+            >
+              <YAxis
+                dataKey="tag"
+                type="category"
+                tickLine={false}
+                tickMargin={5}
+                axisLine={false}
               />
-            </Bar>
-          </BarChart>
-        </ChartContainer>
+              <XAxis dataKey="expense" type="number" hide />
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Bar dataKey="expense" fill="white" radius={10}>
+                <LabelList
+                  position="center"
+                  fontSize={17}
+                  style={{ fill: "black" }}
+                />
+              </Bar>
+            </BarChart>
+          </ChartContainer>
+        )}
       </CardContent>
     </Card>
   );

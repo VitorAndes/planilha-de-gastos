@@ -5,6 +5,7 @@ import { CardChart } from "./components/cardChart";
 import { CardMoney } from "./components/cardMoney";
 import { ExpenseTable } from "./components/expenseTable";
 
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { CardResetData } from "./components/cardResetData";
 import {
@@ -60,11 +61,16 @@ export function App() {
   return (
     <>
       <div className="flex flex-col m-auto text-zinc-100 p-4 pb-28 max-w-7xl min-h-screen w-full space-y-3 items-center">
-        <div className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg"
+        >
           <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-b from-zinc-600 via-lime-600 to-red-600 bg-clip-text text-transparent">
             Planilha de gastos
           </h1>
-          <div className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/80 border-t-zinc-300 border-t backdrop-blur lg:border-none lg:bg-transparent w-full lg:w-0">
+          <div className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/70 border-t-zinc-300 border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none lg:bg- w-full lg:w-0">
             <AddNewBalance updateBalance={updateBalance} />
             <CardResetData handleResetData={handleResetData} />
             <AddNewExpense
@@ -73,25 +79,51 @@ export function App() {
               addNewExpense={addNewExpense}
             />
           </div>
-        </div>
+        </motion.div>
 
         <div className="flex flex-col md:flex-wrap md:flex-row gap-3 p-0 md:p-4 w-full">
           <div className="flex flex-1 flex-col gap-3">
-            <div className="flex flex-col md:flex-row gap-3">
-              <CardMoney
-                revenue="Saldo"
-                value={balance.toFixed(2).replace(".", ",")}
-              />
-              <CardMoney
-                revenue="Despesas"
-                value={expense.toFixed(2).replace(".", ",")}
-              />
+            <div className="flex flex-col md:flex-row gap-2">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex-1"
+              >
+                <CardMoney
+                  revenue="Saldo"
+                  value={balance.toFixed(2).replace(".", ",")}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex-1"
+              >
+                <CardMoney
+                  revenue="Despesas"
+                  value={expense.toFixed(2).replace(".", ",")}
+                />
+              </motion.div>
             </div>
-            <CardChart />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex-1"
+            >
+              <CardChart />
+            </motion.div>
           </div>
-          <div className="flex-1 flex">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="flex-1 flex"
+          >
             <ExpenseTable expenses={expensesList} />
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
