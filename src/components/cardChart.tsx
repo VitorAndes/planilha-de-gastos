@@ -90,18 +90,18 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-zinc-950/60 py-4 border border-zinc-500 text-zinc-100 shadow-white md:h-full">
+    <Card className="flex gap-4 flex-col bg-gray-950/70 py-4 border border-zinc-500 text-zinc-100 shadow-white md:h-full">
       <CardHeader className="items-center py-0">
-        <CardTitle>Total de gastos</CardTitle>
+        <CardTitle className="text-lg">Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-[400px] w-[320px] md:h-full md:w-full">
+      <CardContent className="h-[400px] md:h-full md:w-full p-0">
         <ChartContainer config={chartConfig} className="h-full w-full">
           <BarChart
             accessibilityLayer
             data={chartData}
             layout="vertical"
             margin={{
-              left: 40,
+              left: 60,
             }}
           >
             <YAxis
@@ -119,7 +119,7 @@ export function CardChart() {
             <Bar dataKey="expense" fill="white" radius={10}>
               <LabelList
                 position="center"
-                fontSize={14}
+                fontSize={17}
                 style={{ fill: "black" }}
               />
             </Bar>

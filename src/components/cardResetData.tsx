@@ -1,13 +1,13 @@
 import { RotateCwIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "./ui/dialog";
 
 interface CardResetDataProps {
@@ -19,8 +19,8 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant={"ghost"}
-          className="text-sm w-32 flex flex-col md:gap-1 md:text-white transition-all hover:bg-zinc-300 hover:text-black text-white md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9 md:hover:bg-zinc-100 md:hover:text-black"
+          variant={"link"}
+          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 md:text-base hover:text-zinc-500"
         >
           <span>
             <RotateCwIcon size={40} className="text-zinc-500" />
@@ -28,7 +28,7 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
           Resetar
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] space-y-4 bg-zinc-950 text-zinc-100 border border-zinc-400">
+      <DialogContent className="md:max-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur p-8 space-y-6">
         <DialogHeader>
           <DialogTitle>Tem certeza que deseja resetar os dados?</DialogTitle>
         </DialogHeader>

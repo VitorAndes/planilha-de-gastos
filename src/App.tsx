@@ -59,41 +59,38 @@ export function App() {
 
   return (
     <>
-      <div className="flex flex-col  text-zinc-100 p-4 pb-20 items-center md:w-[1200px] min-h-screen w-full">
-        <div className="w-full space-y-3">
-          <div className="flex flex-col md:flex-row justify-between items-center bg-zinc-950/60 border-b md:p-4 p-2 border-zinc-500 shadow-sm shadow-zinc-400  rounded-xl">
-            <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-r from-zinc-300 via-lime-500 to-red-600 bg-clip-text text-transparent">
-              Planilha de gastos
-            </h1>
-            <div className="flex gap-5 px-2 py-10 md:gap-2 h-16 justify-center items-center flex-1 md:static bottom-0 fixed z-10 rounded-t-2xl md:rounded=t-none bg-zinc-950/90 border-t-zinc-300 border-t backdrop-blur md:border-none md:bg-transparent min-w-[320px] md:w-0">
-              <AddNewBalance updateBalance={updateBalance} />
+      <div className="flex flex-col m-auto text-zinc-100 p-4 pb-28 max-w-7xl min-h-screen w-full space-y-3 items-center">
+        <div className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg">
+          <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-b from-zinc-600 via-lime-600 to-red-600 bg-clip-text text-transparent">
+            Planilha de gastos
+          </h1>
+          <div className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/80 border-t-zinc-300 border-t backdrop-blur lg:border-none lg:bg-transparent w-full lg:w-0">
+            <AddNewBalance updateBalance={updateBalance} />
+            <CardResetData handleResetData={handleResetData} />
+            <AddNewExpense
+              setExpense={setExpense}
+              updateBalance={descountBalance}
+              addNewExpense={addNewExpense}
+            />
+          </div>
+        </div>
 
-              <CardResetData handleResetData={handleResetData}/>
-              <AddNewExpense
-                setExpense={setExpense}
-                updateBalance={descountBalance}
-                addNewExpense={addNewExpense}
+        <div className="flex flex-col md:flex-wrap md:flex-row gap-3 p-0 md:p-4 w-full">
+          <div className="flex flex-1 flex-col gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
+              <CardMoney
+                revenue="Saldo"
+                value={balance.toFixed(2).replace(".", ",")}
+              />
+              <CardMoney
+                revenue="Despesas"
+                value={expense.toFixed(2).replace(".", ",")}
               />
             </div>
+            <CardChart />
           </div>
-
-          <div className="flex flex-col md:flex-row gap-3 justify-center p-0 md:p-4">
-            <div className="flex flex-1 flex-col gap-3">
-              <div className="flex gap-3">
-                <CardMoney
-                  revenue="Saldo"
-                  value={balance.toFixed(2).replace(".", ",")}
-                />
-                <CardMoney
-                  revenue="Despesas"
-                  value={expense.toFixed(2).replace(".", ",")}
-                />
-              </div>
-              <CardChart />
-            </div>
-            <div className="grid col-span-2 row-span-2">
-              <ExpenseTable expenses={expensesList} />
-            </div>
+          <div className="flex-1 flex">
+            <ExpenseTable expenses={expensesList} />
           </div>
         </div>
       </div>

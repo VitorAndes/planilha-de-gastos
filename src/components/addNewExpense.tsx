@@ -31,7 +31,7 @@ const createUserFormSchema = z.object({
     .nonempty("Digite um valor")
     .regex(
       /^-?\d+([.,]\d+)?$/,
-      "Deve ser um número válido, utilizando vírgula ou ponto como separador decimal."
+      "Deve ser um número válido e sem letras, exemplo: 333,33"
     ),
   tag: z.string().nonempty("Escolha uma tag"),
 });
@@ -85,8 +85,8 @@ export function AddNewExpense({
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant={"ghost"}
-          className="flex flex-col md:gap-1 md:text-white transition-all hover:bg-zinc-300 hover:text-black text-white md:text-base py-8 px-4 rounded-t-xl md:rounded-xl md:p-9 md:hover:bg-zinc-100 md:hover:text-black"
+          variant={"link"}
+          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 md:text-base hover:text-red-500"
         >
           <span>
             <CircleDollarSign size={40} className="text-red-500" />
@@ -94,7 +94,7 @@ export function AddNewExpense({
           Novo gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px] bg-zinc-950 text-zinc-100 border border-zinc-400">
+      <DialogContent className="smax-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur">
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
         </DialogHeader>
@@ -104,9 +104,9 @@ export function AddNewExpense({
         >
           <div className="flex flex-col w-full items-center gap-4">
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="local">Com oque gastou ?</label>
+              <label htmlFor="local" className="font-medium" >Com oque gastou ?</label>
               <input
-                className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+                className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
                 type="text"
                 placeholder="Digite com oque gastou..."
                 {...register("local")}
@@ -117,9 +117,9 @@ export function AddNewExpense({
               )}
             </div>
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="expense">Quanto gastou ?</label>
+              <label htmlFor="expense" className="font-medium" >Quanto gastou ?</label>
               <input
-                className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+                className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
                 type="text"
                 placeholder="Digite quanto gastou..."
                 {...register("expense")}
@@ -131,11 +131,11 @@ export function AddNewExpense({
             </div>
             <select
               id="tag"
-              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+              className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
               {...register("tag")}
               required
             >
-              <option value="">-- Selecione onde gastou --</option>
+              <option value="">-- Selecione a tag --</option>
               <option value="alimentação">alimentação</option>
               <option value="cosméticos">cosméticos</option>
               <option value="transporte">transporte</option>
