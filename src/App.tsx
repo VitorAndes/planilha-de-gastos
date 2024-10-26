@@ -92,7 +92,7 @@ export function App() {
 
         <div className="flex flex-col md:flex-wrap md:flex-row gap-3 p-0 md:p-4 w-full">
           <div className="flex flex-1 flex-col gap-3">
-            <div className="flex flex-col items-center md:flex-row gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
