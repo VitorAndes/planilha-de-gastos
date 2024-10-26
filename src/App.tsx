@@ -67,14 +67,17 @@ export function App() {
           transition={{ duration: 0.5 }}
           className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg"
         >
-          <h1 className="font-bold text-lg md:text-3xl bg-gradient-to-b from-zinc-600 via-lime-600 to-red-600 bg-clip-text text-transparent">
-            Planilha de gastos
-          </h1>
+          <div className="flex gap-2 items-center">
+            <img src="./src/assets/logo.png" alt="logo do site" className="rounded-full w-[70px]"/>
+            <h1 className="font-extrabold tracking-wider gap-2 text-lg md:text-3xl bg-gradient-to-r from-lime-500 to-rose-500 bg-clip-text text-transparent">
+              AndesFinance
+            </h1>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: .7 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
             className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-gray-950/70 border-t-zinc-300 border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none lg:bg- w-full lg:w-0"
           >
             <AddNewBalance updateBalance={updateBalance} />
