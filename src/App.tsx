@@ -68,7 +68,7 @@ export function App() {
           className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg"
         >
           <div className="flex gap-2 items-center">
-            <img src="./src/assets/logo.png" alt="logo do site" className="rounded-full w-[70px]"/>
+            <img src="./public/assets/logo.png" alt="logo do site" className="rounded-full w-[70px]"/>
             <h1 className="font-extrabold tracking-wider gap-2 text-lg md:text-3xl bg-gradient-to-r from-lime-500 to-rose-500 bg-clip-text text-transparent">
               AndesFinance
             </h1>
