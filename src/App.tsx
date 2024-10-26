@@ -68,7 +68,7 @@ export function App() {
           className="flex flex-col lg:flex-row items-center w-full bg-gray-950/70 border-b md:p-4 p-2 border-zinc-500 shadow-md shadow-zinc-400 rounded-lg"
         >
           <div className="flex gap-2 items-center">
-            <img src="./public/assets/logo.png" alt="logo do site" className="rounded-full w-[70px]"/>
+            <img src="/assets/logo.png" alt="logo do site" className="rounded-full w-[70px]"/>
             <h1 className="font-extrabold tracking-wider gap-2 text-lg md:text-3xl bg-gradient-to-r from-lime-500 to-rose-500 bg-clip-text text-transparent">
               AndesFinance
             </h1>
@@ -92,7 +92,7 @@ export function App() {
 
         <div className="flex flex-col md:flex-wrap md:flex-row gap-3 p-0 md:p-4 w-full">
           <div className="flex flex-1 flex-col gap-3">
-            <div className="flex flex-col md:flex-row gap-2">
+            <div className="flex flex-col items-center md:flex-row gap-2">
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
