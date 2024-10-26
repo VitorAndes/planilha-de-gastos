@@ -10,19 +10,10 @@
 }
 
 body {
-  background-image: url("./assets/bg.png");
+  background-image: url("./public/assets/bg.png");
   background-size: cover;
   background-position: center;
  	background-repeat: no-repeat;
-}
-
-@media (min-width: 768px) {
-  body {
-    background-image: url("./assets/bg.png");
-    background-size: cover;
-    background-position: center;
-   	background-repeat: no-repeat;
-  }
 }
 
 @layer base {
