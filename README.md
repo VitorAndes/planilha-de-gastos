@@ -1,6 +1,6 @@
 # **Planilha de Gastos**
-![Captura de tela 2024-10-01 130449](https://github.com/user-attachments/assets/8383a7a5-3544-4eef-a012-85bfbdd4b1ca)
 
+![Captura de tela de 2024-10-25 21-21-39](https://github.com/user-attachments/assets/e2d4e065-29f1-4a4c-b4a1-60c4cdcffc88)
 
 ### Descrição
 
