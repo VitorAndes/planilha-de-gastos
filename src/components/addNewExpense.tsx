@@ -144,7 +144,7 @@ export function AddNewExpense({
                 render={({ field }) => (
                   <RadioGroup
                     {...field}
-                    className="flex justify-center gap-5"
+                    className="flex justify-center"
                     onValueChange={(value) => field.onChange(value)}
                   >
                     <div className="flex items-center space-x-2">

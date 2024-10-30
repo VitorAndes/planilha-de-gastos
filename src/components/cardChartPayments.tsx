@@ -12,9 +12,6 @@ import {
 } from "./ui/chart";
 
 const chartConfig = {
-  gasto: {
-    label: "Total gasto - ",
-  },
   crédito: {
     label: "crédito",
     color: "hsl(var(--chart-1))",
@@ -62,19 +59,19 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col flex-1 bg-[#0A1626]/70 py-4 border border-[#C2D2F2] text-zinc-100 shadow-black ">
-      <CardHeader className="items-center py-0">
+    <Card className="flex flex-col flex-shrink-0 bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white shadow ">
+      <CardHeader className="text-center py-0">
         <CardTitle className="text-lg font-bold">
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center h-[400px] md:h-full md:w-full p-0">
+      <CardContent className="flex flex-col justify-center p-0 h-full w-full">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
           <ChartContainer
             config={chartConfig}
-            className="mx-auto aspect-square max-h-[250px] px-0 w-full"
+            className="mx-auto h-[250px] w-full p-0"
           >
             <PieChart>
               <ChartTooltip
