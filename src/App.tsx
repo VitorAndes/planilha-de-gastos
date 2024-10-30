@@ -162,7 +162,7 @@ export function App() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-col md:flex-row gap-2"
+            className="flex flex-1 flex-col md:flex-row gap-2"
           >
             <CardChart />
             <CardChartPayments />
