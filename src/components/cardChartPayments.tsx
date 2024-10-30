@@ -1,0 +1,112 @@
+import { getTotalExpenses } from "@/functions/getBalanceAndExpense";
+import type { chartDataType } from "@/types/Types";
+import { useEffect, useState } from "react";
+import { Pie, PieChart } from "recharts";
+import { LoadingSpinner } from "./isLoading";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "./ui/chart";
+
+const chartConfig = {
+  gasto: {
+    label: "Total gasto - ",
+  },
+  crédito: {
+    label: "crédito",
+    color: "hsl(var(--chart-1))",
+  },
+  débito: {
+    label: "débito",
+    color: "hsl(var(--chart-2))",
+  },
+  dinheiro: {
+    label: "dinheiro",
+    color: "hsl(var(--chart-3))",
+  },
+} satisfies ChartConfig;
+
+export function CardChartPayments() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [chartData, setChartData] = useState<chartDataType[]>([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const chartData = getTotalExpenses();
+
+      const getColor = (paymentMethod: string) => {
+        if (paymentMethod === "débito") {
+          return "#C2D2F2";
+          // biome-ignore lint/style/noUselessElse: <explanation>
+        } else if (paymentMethod === "crédito") {
+          return "#203359";
+          // biome-ignore lint/style/noUselessElse: <explanation>
+        } else {
+          return "#79F297";
+        }
+      };
+
+      const formattedChartData = chartData.map((item) => ({
+        ...item,
+        expense: Number.parseFloat(item.expense.replace(",", ".")),
+        fill: getColor(item.paymentMethod),
+      }));
+
+      setIsLoading(false);
+      setChartData(formattedChartData);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <Card className="flex flex-col flex-1 bg-[#0A1626]/70 py-4 border border-[#C2D2F2] text-zinc-100 shadow-black ">
+      <CardHeader className="items-center py-0">
+        <CardTitle className="text-lg font-bold">
+          Métodos de pagamento
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col justify-center h-[400px] md:h-full md:w-full p-0">
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <ChartContainer
+            config={chartConfig}
+            className="mx-auto aspect-square max-h-[250px] px-0 w-full"
+          >
+            <PieChart>
+              <ChartTooltip
+                content={
+                  <ChartTooltipContent nameKey="paymentMethod" hideLabel />
+                }
+              />
+              <Pie
+                data={chartData}
+                dataKey="expense"
+                labelLine={false}
+                label={({ payload, ...props }) => {
+                  return (
+                    <text
+                      cx={props.cx}
+                      cy={props.cy}
+                      x={props.x}
+                      y={props.y}
+                      textAnchor={props.textAnchor}
+                      dominantBaseline={props.dominantBaseline}
+                      fill="white"
+                    >
+                      {payload.paymentMethod}
+                    </text>
+                  );
+                }}
+                nameKey="paymentMethod"
+              />
+            </PieChart>
+          </ChartContainer>
+        )}
+      </CardContent>
+    </Card>
+  );
+}

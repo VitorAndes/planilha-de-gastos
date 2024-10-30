@@ -1,5 +1,3 @@
-"use client";
-
 import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,6 +22,17 @@ export function CardChart() {
   useEffect(() => {
     const interval = setInterval(() => {
       const chartData = getAllExpenses();
+      const getColor = (tag: string) => {
+        if (tag === "alimentação") {
+          return "rgb(7 89 133)";
+          // biome-ignore lint/style/noUselessElse: <explanation>
+        } else if (tag === "crédito") {
+          return "rgb(91 33 182)";
+          // biome-ignore lint/style/noUselessElse: <explanation>
+        } else {
+          return "rgb(10 120 0)";
+        }
+      };
 
       const expenseData = chartData.reduce<TotalsType>((acc, product) => {
         const formattedExpense = product.expense.replace(",", ".");
@@ -85,9 +94,9 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 flex-col bg-gray-950/70 py-4 border border-zinc-500 text-zinc-100 shadow-white md:h-full">
+    <Card className="flex gap-4 flex-col flex-1 bg-[#0A1626]/70 py-4 border border-[#C2D2F2] text-zinc-100 shadow-black md:h-full">
       <CardHeader className="items-center py-0">
-        <CardTitle className="text-lg">Total de gastos</CardTitle>
+        <CardTitle className="text-lg font-bold">Total de gastos</CardTitle>
       </CardHeader>
       <CardContent className="h-[400px] md:h-full md:w-full p-0">
         {isLoading ? (

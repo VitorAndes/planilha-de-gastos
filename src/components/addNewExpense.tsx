@@ -1,25 +1,22 @@
 import { getBalance, getTotalExpenses } from "@/functions/getBalanceAndExpense";
 import { handleCreateExpense } from "@/functions/handleCreateExpense";
+import type { ExpenseData } from "@/types/Types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CircleDollarSign } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-
-export type ExpenseType = {
-  local: string;
-  expense: string;
-  tag: string;
-};
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 
 const createUserFormSchema = z.object({
   local: z
@@ -34,12 +31,13 @@ const createUserFormSchema = z.object({
       "Deve ser um número válido e sem letras, exemplo: 333,33"
     ),
   tag: z.string().nonempty("Escolha uma tag"),
+  paymentMethod: z.enum(["crédito", "débito", "dinheiro"]),
 });
 
 type createUserFormData = z.infer<typeof createUserFormSchema>;
 
 interface AddNewExpenseProps {
-  setExpense: React.Dispatch<React.SetStateAction<number>>;
+  setExpense: React.Dispatch<React.SetStateAction<ExpenseData[]>>;
   updateBalance: (newExpense: number) => void;
   addNewExpense: (newExpense: createUserFormData) => void;
 }
@@ -53,7 +51,7 @@ export function AddNewExpense({
     register,
     handleSubmit,
     reset,
-    
+    control,
     formState: { errors },
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
@@ -67,7 +65,7 @@ export function AddNewExpense({
       return 0;
     }
 
-    handleCreateExpense(data.tag, data.expense, data.local);
+    handleCreateExpense(data.tag, data.expense, data.local, data.paymentMethod);
 
     const newTotal = getTotalExpenses();
     setExpense(newTotal);
@@ -76,7 +74,7 @@ export function AddNewExpense({
 
     addNewExpense(data);
 
-    toast.success("Novo gasto foi adicionado!")
+    toast.success("Novo gasto foi adicionado!");
 
     reset();
   };
@@ -86,27 +84,32 @@ export function AddNewExpense({
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 md:text-base hover:text-red-500"
+          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-rose-500"
         >
           <span>
-            <CircleDollarSign size={40} className="text-red-500" />
+            <CircleDollarSign size={34} className="text-rose-800" />
           </span>
           Novo gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="smax-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur">
+      <DialogContent className="text-zinc-100 backdrop-blur">
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
+          <DialogDescription>
+            Adicione um novo gasto para ser gerenciado.
+          </DialogDescription>
         </DialogHeader>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center gap-4 py-4 "
+          className="flex flex-col items-center gap-4 py-4"
         >
           <div className="flex flex-col w-full items-center gap-4">
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="local" className="font-medium" >Com oque gastou ?</label>
+              <label htmlFor="local" className="font-medium">
+                Com oque gastou ?
+              </label>
               <input
-                className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
+                className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
                 placeholder="Digite com oque gastou..."
                 {...register("local")}
@@ -117,9 +120,11 @@ export function AddNewExpense({
               )}
             </div>
             <div className="flex flex-col gap-3 w-full">
-              <label htmlFor="expense" className="font-medium" >Quanto gastou ?</label>
+              <label htmlFor="expense" className="font-medium">
+                Quanto gastou ?
+              </label>
               <input
-                className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
+                className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
                 placeholder="Digite quanto gastou..."
                 {...register("expense")}
@@ -129,9 +134,57 @@ export function AddNewExpense({
                 <span className="text-red-600">{errors.expense.message}</span>
               )}
             </div>
+            <div className="flex flex-col gap-3 w-full">
+              <span className="font-medium">Forma de pagamento</span>
+
+              <Controller
+                name="paymentMethod"
+                control={control}
+                defaultValue="débito"
+                render={({ field }) => (
+                  <RadioGroup
+                    {...field}
+                    className="flex justify-center gap-5"
+                    onValueChange={(value) => field.onChange(value)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="débito"
+                        id="debit"
+                        className="text-sky-600"
+                      />
+                      <label htmlFor="debit">Débito</label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="crédito"
+                        id="credit"
+                        className="text-violet-600"
+                      />
+                      <label htmlFor="credit">Crédito</label>
+                    </div>
+
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="dinheiro"
+                        id="cash"
+                        className="text-lime-500"
+                      />
+                      <label htmlFor="cash">Dinheiro</label>
+                    </div>
+                  </RadioGroup>
+                )}
+              />
+              {errors.paymentMethod && (
+                <span className="text-red-600">
+                  {errors.paymentMethod.message}
+                </span>
+              )}
+            </div>
             <select
               id="tag"
-              className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
+              className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
               {...register("tag")}
               required
             >
@@ -152,7 +205,7 @@ export function AddNewExpense({
             <Button
               type="submit"
               onClick={() => {}}
-              className="bg-zinc-950 rounded-md p-2 w-full border border-zinc-400"
+              className="bg-[#0A1626] rounded-md p-2 w-full border border-[#C2D2F2]"
             >
               Atualizar gastos
             </Button>

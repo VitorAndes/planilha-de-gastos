@@ -4,6 +4,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -20,32 +21,33 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 md:text-base hover:text-zinc-500"
+          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-zinc-500"
         >
           <span>
-            <RotateCwIcon size={40} className="text-zinc-500" />
+            <RotateCwIcon size={34} className="text-zinc-500" />
           </span>
           Resetar
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur p-8 space-y-6">
+      <DialogContent className="max-w-[525px]  text-zinc-100 backdrop-blur p-8 space-y-6">
         <DialogHeader>
           <DialogTitle>Tem certeza que deseja resetar os dados?</DialogTitle>
+          <DialogDescription>
+            Resete seus dados para iniciar um novo mês
+          </DialogDescription>
         </DialogHeader>
-          <DialogFooter className="flex gap-2 w-full">
-            <DialogClose
-              className="bg-red-600 hover:bg-red-500 rounded-md p-2 w-full border border-zinc-400"
-            >
-              Cancelar
-            </DialogClose>
-            <DialogClose
-              type="button"
-              onClick={handleResetData}
-              className="bg-zinc-950 hover:bg-zinc-800 rounded-md p-2 w-full border border-zinc-400"
-            >
-              Sim
-            </DialogClose>
-          </DialogFooter>
+        <DialogFooter className="flex gap-2 w-full">
+          <DialogClose className="bg-red-600 hover:bg-red-500 rounded-md p-2 w-full border border-zinc-400">
+            Cancelar
+          </DialogClose>
+          <DialogClose
+            type="button"
+            onClick={handleResetData}
+            className="bg-[#0A1626] hover:bg-zinc-800 rounded-md p-2 w-full border border-zinc-400"
+          >
+            Sim
+          </DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
