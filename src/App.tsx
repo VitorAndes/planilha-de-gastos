@@ -79,7 +79,7 @@ export function App() {
     .replace(".", ",");
 
   return (
-    <div className="text-zinc-100 pb-28 min-h-screen w-full space-y-3">
+    <div className="text-zinc-100 pb-28 min-h-screen w-full space-y-3 ">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -110,7 +110,7 @@ export function App() {
       </motion.div>
 
       <div className="flex flex-col gap-3 p-0 md:p-4 max-w-5xl mx-auto">
-        <div className="flex flex-col md:flex-row gap-2">
+        <div className="flex flex-row flex-wrap gap-2">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -148,7 +148,7 @@ export function App() {
           </motion.div>
         </div>
 
-        <div className="space-y-2 w-full">
+        <div className="flex flex-col space-y-2 w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -158,15 +158,24 @@ export function App() {
             <ExpenseTable expenses={expensesList} />
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-row flex-wrap gap-2 w-full"
-          >
-            <CardChart />
-            <CardChartPayments />
-          </motion.div>
+          <div className="flex flex-col md:flex-row gap-2">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="flex-1 w-full"
+            >
+              <CardChart />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex-1 w-full"
+            >
+              <CardChartPayments />
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
