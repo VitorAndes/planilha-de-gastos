@@ -148,12 +148,12 @@ export function App() {
           </motion.div>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="space-y-2 w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex-1 flex"
+            className="flex flex-1"
           >
             <ExpenseTable expenses={expensesList} />
           </motion.div>
@@ -162,7 +162,7 @@ export function App() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-1 flex-row flex-wrap gap-2"
+            className="flex flex-row flex-wrap gap-2 w-full"
           >
             <CardChart />
             <CardChartPayments />

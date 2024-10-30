@@ -87,7 +87,7 @@ export function CardChart() {
       <CardHeader className="items-center py-0">
         <CardTitle className="text-lg font-bold">Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-[400px] md:h-full md:w-full p-2">
+      <CardContent className="h-[400px] md:h-full w-full p-2">
         {isLoading ? (
           <LoadingSpinner />
         ) : (

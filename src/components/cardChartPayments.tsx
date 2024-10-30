@@ -65,13 +65,13 @@ export function CardChartPayments() {
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center p-1 h-full w-full">
+      <CardContent className="flex flex-col justify-center p-2 h-full w-full">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
           <ChartContainer
             config={chartConfig}
-            className="mx-auto h-[250px] w-full p-0"
+            className="h-full w-full p-0"
           >
             <PieChart>
               <ChartTooltip
