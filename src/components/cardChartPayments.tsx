@@ -59,13 +59,13 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col flex-shrink-0 bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white shadow ">
+    <Card className="flex flex-col bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white shadow ">
       <CardHeader className="text-center py-0">
         <CardTitle className="text-lg font-bold">
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center p-0 h-full w-full">
+      <CardContent className="flex flex-col justify-center p-1 h-full w-full">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
