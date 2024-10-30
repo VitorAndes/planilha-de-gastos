@@ -22,17 +22,6 @@ export function CardChart() {
   useEffect(() => {
     const interval = setInterval(() => {
       const chartData = getAllExpenses();
-      const getColor = (tag: string) => {
-        if (tag === "alimentação") {
-          return "rgb(7 89 133)";
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else if (tag === "crédito") {
-          return "rgb(91 33 182)";
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else {
-          return "rgb(10 120 0)";
-        }
-      };
 
       const expenseData = chartData.reduce<TotalsType>((acc, product) => {
         const formattedExpense = product.expense.replace(",", ".");

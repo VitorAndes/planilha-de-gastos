@@ -1,4 +1,4 @@
-import type { ExpenseType } from "@/components/addNewExpense";
+import type { ExpenseType } from "@/types/Types";
 
 export function handleCreateExpense(
   tag: string,
