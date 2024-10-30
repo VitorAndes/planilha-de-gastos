@@ -84,7 +84,7 @@ export function App() {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col lg:flex-row items-center w-full bg-[#0A1626]/70 border-b p-2 border-[#C2D2F2] shadow-md shadow-black"
+        className="flex flex-col lg:flex-row items-center px-2 w-full bg-[#0A1626]/70 shadow rounded-b-md shadow-white"
       >
         <div className="flex gap-2 p-2 items-center">
           <img src="/assets/logo.png" alt="logo do site" className="w-10" />
