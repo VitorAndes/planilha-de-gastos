@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -52,17 +53,20 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 md:text-base hover:text-lime-500"
+          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-[#79F297]"
         >
           <span>
-            <Wallet size={40} className="text-lime-600" />
+            <Wallet size={34} className="text-[#79F297]" />
           </span>
           Novo saldo
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[525px] bg-zinc-950/80 text-zinc-100 border border-zinc-400 backdrop-blur">
+      <DialogContent className="max-w-[525px] text-zinc-100 backdrop-blur">
         <DialogHeader>
           <DialogTitle>Novo saldo</DialogTitle>
+          <DialogDescription>
+            Adicione um novo saldo para começar a gastar.
+          </DialogDescription>
         </DialogHeader>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -70,7 +74,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
         >
           <div className="flex flex-col w-full gap-2">
             <input
-              className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
+              className="border-[#C2D2F2] bg-[#0A1626] rounded-lg p-2 w-full border"
               type="text"
               placeholder="Adicionar Saldo"
               {...register("balance")}
@@ -83,7 +87,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
             <Button
               type="submit"
               onClick={() => {}}
-              className="bg-zinc-950 rounded-lg p-2 w-full border border-zinc-400"
+              className="border-[#C2D2F2] bg-[#0A1626] rounded-lg p-2 w-full border"
             >
               Atualizar Saldo
             </Button>
