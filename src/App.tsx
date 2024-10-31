@@ -97,7 +97,7 @@ export function App() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.7 }}
-          className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded=t-none bg-[#0A1626]/70 border-t-[#C2D2F2] border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none w-full lg:w-0"
+          className="flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 fixed z-10 rounded-t-lg lg:rounded-t-none bg-[#0A1626]/70 border-t-[#C2D2F2] border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none w-full lg:w-0"
         >
           <AddNewBalance updateBalance={updateBalance} />
           <CardResetData handleResetData={handleResetData} />
@@ -109,7 +109,7 @@ export function App() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-3 p-0 md:p-4 max-w-5xl mx-auto">
+      <div className="flex flex-col gap-3 p-0 md:p-4 max-w-7xl mx-auto">
         <div className="flex flex-row flex-wrap gap-2">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -158,12 +158,12 @@ export function App() {
             <ExpenseTable expenses={expensesList} />
           </motion.div>
 
-          <div className="flex flex-col md:flex-row gap-2">
+          <div className="flex flex-col lg:flex-row gap-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex-1 w-full"
+              className="flex-1"
             >
               <CardChart />
             </motion.div>
@@ -171,7 +171,7 @@ export function App() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="flex-1 w-full"
+              className="flex-1"
             >
               <CardChartPayments />
             </motion.div>
