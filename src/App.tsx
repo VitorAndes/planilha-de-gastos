@@ -110,7 +110,7 @@ export function App() {
       </motion.div>
 
       <div className="grid grid-cols-4 p-4 w-full lg:max-w-[1280px] gap-3 ">
-          <div className="col-span-4 grid md:grid-cols-4 gap-3 md:gap-2 w-full">
+          <div className="col-span-4 grid md:grid-cols-4 gap-3 md:gap-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -148,7 +148,7 @@ export function App() {
             </motion.div>
           </div>
 
-          <div className="col-span-4 grid grid-cols-4 gap-3 w-full">
+          <div className="col-span-4 grid grid-cols-4 gap-3">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -158,7 +158,7 @@ export function App() {
               <ExpenseTable expenses={expensesList} />
             </motion.div>
 
-            <div className="col-span-4 grid md:grid-cols-4 gap-2 w-full">
+            <div className="col-span-4 grid md:grid-cols-4 gap-2">
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
