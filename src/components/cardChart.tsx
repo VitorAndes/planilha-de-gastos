@@ -83,15 +83,15 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 flex-col bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white md:h-full w-full">
+    <Card className="flex gap-4 flex-col justify-center bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white md:h-full w-full">
       <CardHeader className="text-center py-0">
         <CardTitle className="text-lg font-bold">Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent className="h-full w-full p-2">
+      <CardContent >
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer config={chartConfig} className="h-full w-full">
+          <ChartContainer config={chartConfig} >
             <BarChart
               accessibilityLayer
               data={chartData}

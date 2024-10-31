@@ -109,7 +109,7 @@ export function App() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-3 p-0 md:p-4 max-w-7xl mx-auto">
+      <div className="flex flex-col gap-5 p-0 md:p-4 max-w-7xl mx-auto">
         <div className="flex flex-row flex-wrap gap-2">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -148,7 +148,7 @@ export function App() {
           </motion.div>
         </div>
 
-        <div className="flex flex-col space-y-2 w-full">
+        <div className="flex flex-col gap-5">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}

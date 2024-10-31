@@ -59,20 +59,17 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col bg-[#0A1626]/10 py-4 text-zinc-100 shadow-white shadow h-full w-full">
+    <Card className="flex flex-col flex-1 justify-center bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white shadow h-full">
       <CardHeader className="text-center py-0">
         <CardTitle className="text-lg font-bold">
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
-      <CardContent className="h-full w-full p-2">
+      <CardContent>
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer
-            config={chartConfig}
-            className="h-full w-full"
-          >
+          <ChartContainer config={chartConfig}>
             <PieChart>
               <ChartTooltip
                 content={
