@@ -91,7 +91,7 @@ export function CardChart() {
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer config={chartConfig} >
+          <ChartContainer config={chartConfig} className="w-full h-full" >
             <BarChart
               accessibilityLayer
               data={chartData}

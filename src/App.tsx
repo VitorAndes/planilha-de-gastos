@@ -109,13 +109,13 @@ export function App() {
         </motion.div>
       </motion.div>
 
-      <div className="flex flex-col gap-3 p-4 w-full md:w-[900px] lg:w-[1280px]">
-          <div className="flex flex-col md:flex-row gap-3 md:gap-2 w-full">
+      <div className="grid grid-cols-4 p-4 w-full lg:max-w-[1280px] gap-3 ">
+          <div className="col-span-4 grid md:grid-cols-4 gap-3 md:gap-2 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex-1"
+              className="flex-1 col-span-1"
             >
               <CardMoney
                 revenue="Saldo"
@@ -126,7 +126,7 @@ export function App() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex-1"
+              className="flex-1 col-span-1"
             >
               <CardMoney revenue="Gastos" value={totalExpensesValue} />
             </motion.div>
@@ -134,7 +134,7 @@ export function App() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex-1"
+              className="flex-1 col-span-1"
             >
               <CardPaymentMethod revenue="Débito" value={totalDebit} />
             </motion.div>
@@ -142,28 +142,28 @@ export function App() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex-1"
+              className="flex-1 col-span-1"
             >
               <CardPaymentMethod revenue="Crédito" value={totalCredit} />
             </motion.div>
           </div>
 
-          <div className="flex flex-col gap-3 w-full">
+          <div className="col-span-4 grid grid-cols-4 gap-3 w-full">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-1"
+              className="col-span-4"
             >
               <ExpenseTable expenses={expensesList} />
             </motion.div>
 
-            <div className="flex flex-col md:flex-row gap-2 w-full">
+            <div className="col-span-4 grid md:grid-cols-4 gap-2 w-full">
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="flex flex-1"
+                className="col-span-2"
               >
                 <CardChart />
               </motion.div>
@@ -171,7 +171,7 @@ export function App() {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="flex flex-1"
+                className="col-span-2"
               >
                 <CardChartPayments />
               </motion.div>

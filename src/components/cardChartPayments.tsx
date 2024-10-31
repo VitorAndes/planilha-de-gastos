@@ -69,7 +69,7 @@ export function CardChartPayments() {
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer config={chartConfig}>
+          <ChartContainer config={chartConfig} className="w-full h-full">
             <PieChart>
               <ChartTooltip
                 content={
