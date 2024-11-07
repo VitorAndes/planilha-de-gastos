@@ -53,15 +53,15 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-[#79F297]"
+          className="text-lg flex flex-col gap-2 transition-all text-my-body hover:text-emerald-600"
         >
           <span>
-            <Wallet size={34} className="text-[#79F297]" />
+            <Wallet size={34} className="text-emerald-700" />
           </span>
           Novo saldo
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[525px] text-zinc-100 backdrop-blur">
+      <DialogContent className="max-w-[525px] text-my-body backdrop-blur">
         <DialogHeader>
           <DialogTitle>Novo saldo</DialogTitle>
           <DialogDescription>
@@ -74,7 +74,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
         >
           <div className="flex flex-col w-full gap-2">
             <input
-              className="border-[#C2D2F2] bg-[#0A1626] rounded-lg p-2 w-full border"
+              className="rounded-lg p-2 w-full border"
               type="text"
               placeholder="Adicionar Saldo"
               {...register("balance")}
@@ -87,7 +87,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
             <Button
               type="submit"
               onClick={() => {}}
-              className="border-[#C2D2F2] bg-[#0A1626] rounded-lg p-2 w-full border"
+              className="bg-my-body text-secondary rounded-lg p-2 w-full border"
             >
               Atualizar Saldo
             </Button>

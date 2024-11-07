@@ -7,8 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
   type ChartConfig,
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
 } from "./ui/chart";
 
 const chartConfig = {
@@ -36,13 +36,13 @@ export function CardChartPayments() {
 
       const getColor = (paymentMethod: string) => {
         if (paymentMethod === "débito") {
-          return "#C2D2F2";
+          return "#7c3aed";
           // biome-ignore lint/style/noUselessElse: <explanation>
         } else if (paymentMethod === "crédito") {
-          return "#203359";
+          return "#4f46e5";
           // biome-ignore lint/style/noUselessElse: <explanation>
         } else {
-          return "#79F297";
+          return "#059669";
         }
       };
 
@@ -59,44 +59,29 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col flex-1 gap-2 justify-center bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white shadow h-full">
-      <CardHeader className="text-center py-0">
+    <Card className="flex flex-col flex-1 gap-2 p-4 bg-gradient-to-b from-text-secondary to-my-primary text-primary h-96 shadow-sm shadow-violet-300">
+      <CardHeader className="text-center pt-0">
         <CardTitle className="text-lg font-bold">
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="w-full h-full">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
           <ChartContainer config={chartConfig} className="w-full h-full">
-            <PieChart>
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent nameKey="paymentMethod" hideLabel />
-                }
-              />
+            <PieChart style={{ fontSize: 24 }}>
               <Pie
                 data={chartData}
                 dataKey="expense"
-                labelLine={false}
-                label={({ payload, ...props }) => {
-                  return (
-                    <text
-                      cx={props.cx}
-                      cy={props.cy}
-                      x={props.x}
-                      y={props.y}
-                      textAnchor={props.textAnchor}
-                      dominantBaseline={props.dominantBaseline}
-                      fill="white"
-                      className="text-[12px] lg:text-[20px]"
-                    >
-                      {payload.paymentMethod}
-                    </text>
-                  );
-                }}
                 nameKey="paymentMethod"
+                outerRadius={106}
+                innerRadius={74}
+                labelLine={false}
+              />
+              <ChartLegend
+                content={<ChartLegendContent nameKey="paymentMethod" />}
+                className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
               />
             </PieChart>
           </ChartContainer>

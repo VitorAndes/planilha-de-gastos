@@ -6,14 +6,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins";
 }
 
 body {
-  background-image: url("/assets/bg.png");
-  background-size: cover;
-  background-position: center;
- 	background-repeat: no-repeat;
+  background: #0d0a18;
 }
 
 @layer base {
@@ -69,14 +65,5 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-2: 340 75% 55%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

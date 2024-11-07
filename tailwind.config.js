@@ -2,10 +2,10 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   prefix: "",
   theme: {
@@ -18,9 +18,24 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        'desktop-image': "url('')",
+        "desktop-image": "url('')",
+      },
+      fontFamily: {
+        body: ["Montserrat", "sans-serif"],
       },
       colors: {
+        text: {
+          primary: "#0D0A18",
+          secondary: "#EDE9F6",
+        },
+        my: {
+          body: "#0D0A18",
+          primary: "#9677A7",
+          secondary: "#762F53",
+          tertiary: "#AA99D7",
+        },
+        "gradient-primary": "#88FFCE",
+        "gradient-secondary": "#FF8587",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -69,8 +84,7 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

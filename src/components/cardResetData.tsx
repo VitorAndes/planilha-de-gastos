@@ -21,15 +21,15 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-zinc-500"
+          className="text-lg flex flex-col gap-2 transition-all text-primary hover:text-zinc-700"
         >
           <span>
-            <RotateCwIcon size={34} className="text-zinc-500" />
+            <RotateCwIcon size={34} className="text-zinc-700" />
           </span>
           Resetar
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[525px]  text-zinc-100 backdrop-blur p-8 space-y-6">
+      <DialogContent className="max-w-[525px]  text-primary backdrop-blur p-8 space-y-6">
         <DialogHeader>
           <DialogTitle>Tem certeza que deseja resetar os dados?</DialogTitle>
           <DialogDescription>
@@ -37,13 +37,13 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex gap-2 w-full">
-          <DialogClose className="bg-red-600 hover:bg-red-500 rounded-md p-2 w-full border border-zinc-400">
+          <DialogClose className="bg-red-500 hover:bg-red-600 rounded-md p-2 w-full border border-zinc-400">
             Cancelar
           </DialogClose>
           <DialogClose
             type="button"
             onClick={handleResetData}
-            className="bg-[#0A1626] hover:bg-zinc-800 rounded-md p-2 w-full border border-zinc-400"
+            className="bg-my-body text-secondary rounded-md p-2 w-full border border-zinc-400"
           >
             Sim
           </DialogClose>

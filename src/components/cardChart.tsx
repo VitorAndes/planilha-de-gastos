@@ -1,4 +1,4 @@
-import { Bar, BarChart, LabelList, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -83,40 +83,41 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 flex-col justify-center bg-[#0A1626]/70 py-4 text-zinc-100 shadow-white">
-      <CardHeader className="text-center py-0">
+    <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-primary text-primary h-full shadow-sm shadow-violet-300">
+      <CardHeader className="text-center pt-0">
         <CardTitle className="text-lg font-bold">Total de gastos</CardTitle>
       </CardHeader>
-      <CardContent >
+      <CardContent className="h-full w-full p-0">
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer config={chartConfig} className="w-full h-full" >
+          <ChartContainer config={chartConfig} className="w-full h-full">
             <BarChart
               accessibilityLayer
               data={chartData}
-              layout="vertical"
               margin={{
-                left: 60,
+                top: 20,
               }}
             >
-              <YAxis
+              <CartesianGrid vertical={false} />
+              <XAxis
                 dataKey="tag"
-                type="category"
                 tickLine={false}
-                tickMargin={5}
+                tickMargin={10}
                 axisLine={false}
+                style={{ fill: "black" }}
+                tickFormatter={(value) => value.slice(0, 3)}
               />
-              <XAxis dataKey="expense" type="number" hide />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent hideLabel />}
               />
-              <Bar dataKey="expense" fill="white" radius={10}>
+              <Bar dataKey="expense" fill="white" radius={8}>
                 <LabelList
-                  position="center"
-                  fontSize={17}
-                  style={{ fill: "black" }}
+                  position="top"
+                  offset={12}
+                  className="fill-black"
+                  fontSize={18}
                 />
               </Bar>
             </BarChart>

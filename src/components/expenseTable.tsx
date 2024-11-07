@@ -14,17 +14,17 @@ interface ExpenseTableProps {
 
 export function ExpenseTable({ expenses }: ExpenseTableProps) {
   return (
-    <div className="rounded-md py-4 shadow shadow-white flex flex-col flex-1 gap-2 max-w-7xl h-full  bg-[#0A1626]/70">
+    <div className="rounded-md py-4 bg-gradient-to-b from-text-secondary to-my-primary text-primary flex flex-col flex-1 gap-2 max-w-7xl h-full shadow-sm shadow-violet-300">
       <div className="pb-6 px-4">
-        <h1 className="text-lg font-bold">Transações</h1>
+        <h1 className="text-lg font-bold -tracking-tighter">Transações</h1>
       </div>
       <Table>
         <TableHeader>
           <TableRow className="flex">
-            <TableHead className="flex-1 text-white">Lugar</TableHead>
-            <TableHead className="flex-1 text-white">Tag</TableHead>
-            <TableHead className="flex-1 text-white">Gasto</TableHead>
-            <TableHead className="flex-1 text-white">
+            <TableHead className="flex-1 text-primary">Lugar</TableHead>
+            <TableHead className="flex-1 text-primary">Tag</TableHead>
+            <TableHead className="flex-1 text-primary">Gasto</TableHead>
+            <TableHead className="flex-1 text-primary">
               Método de pagamento
             </TableHead>
           </TableRow>
@@ -33,25 +33,25 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
           {expenses.map(({ expense, local, tag, paymentMethod }, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <TableRow key={index} className="flex">
-              <TableCell className="text-zinc-400 flex-1">
+              <TableCell className="text-primary flex-1">
                 <span>{local}</span>
               </TableCell>
               <TableCell className="flex-1">
-                <span className="font-medium text-zinc-400">{tag}</span>
+                <span className="font-medium text-primary">{tag}</span>
               </TableCell>
-              <TableCell className="font-medium flex-1 text-red-600">
+              <TableCell className="font-medium flex-1 text-red-900">
                 <span>R$ {expense.replace(".", ",")}</span>
               </TableCell>
               {paymentMethod === "débito" ? (
-                <TableCell className="font-medium flex-1 text-[#C2D2F2]">
+                <TableCell className="font-medium flex-1 text-violet-900">
                   <span>{paymentMethod}</span>
                 </TableCell>
               ) : paymentMethod === "crédito" ? (
-                <TableCell className="font-medium flex-1 text-blue-500">
+                <TableCell className="font-medium flex-1 text-indigo-900">
                   <span>{paymentMethod}</span>
                 </TableCell>
               ) : (
-                <TableCell className="font-medium flex-1 text-[#79F297]">
+                <TableCell className="font-medium flex-1 text-emerald-900">
                   <span>{paymentMethod}</span>
                 </TableCell>
               )}

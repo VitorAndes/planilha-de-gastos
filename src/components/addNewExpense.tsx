@@ -84,15 +84,15 @@ export function AddNewExpense({
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm flex flex-col gap-2 transition-all text-zinc-100 hover:text-rose-500"
+          className="text-lg flex flex-col gap-2 transition-all text-primary hover:text-rose-700"
         >
           <span>
-            <CircleDollarSign size={34} className="text-rose-800" />
+            <CircleDollarSign size={34} className="text-rose-700" />
           </span>
           Novo gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="text-zinc-100 backdrop-blur">
+      <DialogContent className="text-primary backdrop-blur">
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
           <DialogDescription>
@@ -109,7 +109,7 @@ export function AddNewExpense({
                 Com oque gastou ?
               </label>
               <input
-                className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
                 placeholder="Digite com oque gastou..."
                 {...register("local")}
@@ -124,7 +124,7 @@ export function AddNewExpense({
                 Quanto gastou ?
               </label>
               <input
-                className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
                 placeholder="Digite quanto gastou..."
                 {...register("expense")}
@@ -184,7 +184,7 @@ export function AddNewExpense({
             </div>
             <select
               id="tag"
-              className="bg-[#0A1626] rounded-lg p-2 w-full border border-[#C2D2F2]"
+              className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
               {...register("tag")}
               required
             >
@@ -205,7 +205,7 @@ export function AddNewExpense({
             <Button
               type="submit"
               onClick={() => {}}
-              className="bg-[#0A1626] rounded-md p-2 w-full border border-[#C2D2F2]"
+              className="bg-my-body text-secondary rounded-md p-2 w-full border border-[#C2D2F2]"
             >
               Atualizar gastos
             </Button>
