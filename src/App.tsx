@@ -79,12 +79,12 @@ export function App() {
     .replace(".", ",");
 
   return (
-    <div className="flex flex-col justify-start items-center m-auto max-w-7xl min-h-screen">
+    <div className="flex flex-col justify-start items-center m-auto max-w-7xl pb-28 min-h-screen">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-between bg-gradient-to-t from-my-primary to-text-secondary w-full h-24 rounded-xl p-4 mb-8 shadow-sm shadow-violet-300"
+        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-primary to-text-secondary w-full h-24 rounded-xl p-4 mb-8 shadow-sm shadow-violet-300"
       >
         <h1 className="text-3xl -tracking-tighter font-bold">AndesFinance</h1>
 
