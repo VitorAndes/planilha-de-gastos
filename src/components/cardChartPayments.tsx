@@ -59,9 +59,9 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col flex-1 gap-2 p-4 bg-gradient-to-b from-text-secondary to-my-primary text-primary h-96 shadow-sm shadow-violet-300">
+    <Card className="flex flex-col flex-1 justify-center p-10 gap-2 bg-gradient-to-b from-text-secondary to-my-primary text-primary h-96 shadow-sm shadow-violet-300">
       <CardHeader className="text-center pt-0">
-        <CardTitle className="text-lg font-bold">
+        <CardTitle className="text-lg font-bold -tracking-tighter">
           Métodos de pagamento
         </CardTitle>
       </CardHeader>
@@ -81,7 +81,7 @@ export function CardChartPayments() {
               />
               <ChartLegend
                 content={<ChartLegendContent nameKey="paymentMethod" />}
-                className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                className="flex items-center flex-wrap"
               />
             </PieChart>
           </ChartContainer>

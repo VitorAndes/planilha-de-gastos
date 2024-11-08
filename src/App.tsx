@@ -143,7 +143,7 @@ export function App() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -153,7 +153,7 @@ export function App() {
             <ExpenseTable expenses={expensesList} />
           </motion.div>
 
-          <div className="grid grid-cols-2 col-span-2 gap-2">
+          <div className="grid grid-cols-2 col-span-2 gap-3">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}

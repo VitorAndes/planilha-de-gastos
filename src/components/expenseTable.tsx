@@ -21,10 +21,16 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
       <Table>
         <TableHeader>
           <TableRow className="flex">
-            <TableHead className="flex-1 text-primary">Lugar</TableHead>
-            <TableHead className="flex-1 text-primary">Tag</TableHead>
-            <TableHead className="flex-1 text-primary">Gasto</TableHead>
-            <TableHead className="flex-1 text-primary">
+            <TableHead className="flex-1 font-bold text-base text-primary">
+              Lugar
+            </TableHead>
+            <TableHead className="flex-1 font-bold text-base text-primary">
+              Tag
+            </TableHead>
+            <TableHead className="flex-1 font-bold text-base text-primary">
+              Gasto
+            </TableHead>
+            <TableHead className="flex-1 font-bold text-base text-primary">
               Método de pagamento
             </TableHead>
           </TableRow>
@@ -33,26 +39,38 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
           {expenses.map(({ expense, local, tag, paymentMethod }, index) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <TableRow key={index} className="flex">
-              <TableCell className="text-primary flex-1">
-                <span>{local}</span>
+              <TableCell className="flex-1">
+                <span className="font-regular text-base text-primary">
+                  {local}
+                </span>
               </TableCell>
               <TableCell className="flex-1">
-                <span className="font-medium text-primary">{tag}</span>
+                <span className="font-regular text-base text-primary">
+                  {tag}
+                </span>
               </TableCell>
-              <TableCell className="font-medium flex-1 text-red-900">
-                <span>R$ {expense.replace(".", ",")}</span>
+              <TableCell className="flex-1">
+                <span className="font-regular text-base text-red-800">
+                  R$ {expense.replace(".", ",")}
+                </span>
               </TableCell>
               {paymentMethod === "débito" ? (
-                <TableCell className="font-medium flex-1 text-violet-900">
-                  <span>{paymentMethod}</span>
+                <TableCell className="flex-1">
+                  <span className="font-regular text-base text-violet-900">
+                    {paymentMethod}
+                  </span>
                 </TableCell>
               ) : paymentMethod === "crédito" ? (
-                <TableCell className="font-medium flex-1 text-indigo-900">
-                  <span>{paymentMethod}</span>
+                <TableCell className="flex-1">
+                  <span className="font-regular text-base text-indigo-900">
+                    {paymentMethod}
+                  </span>
                 </TableCell>
               ) : (
-                <TableCell className="font-medium flex-1 text-emerald-900">
-                  <span>{paymentMethod}</span>
+                <TableCell className="flex-1">
+                  <span className="font-regular text-base text-emerald-900">
+                    {paymentMethod}
+                  </span>
                 </TableCell>
               )}
             </TableRow>

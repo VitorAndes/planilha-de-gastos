@@ -85,7 +85,9 @@ export function CardChart() {
   return (
     <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-primary text-primary h-full shadow-sm shadow-violet-300">
       <CardHeader className="text-center pt-0">
-        <CardTitle className="text-lg font-bold">Total de gastos</CardTitle>
+        <CardTitle className="text-lg font-bold -tracking-tighter">
+          Total de gastos
+        </CardTitle>
       </CardHeader>
       <CardContent className="h-full w-full p-0">
         {isLoading ? (
@@ -105,19 +107,16 @@ export function CardChart() {
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
-                style={{ fill: "black" }}
+                style={{ fill: "black", fontSize: "13" }}
                 tickFormatter={(value) => value.slice(0, 3)}
               />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent hideLabel />}
-              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Bar dataKey="expense" fill="white" radius={8}>
                 <LabelList
                   position="top"
                   offset={12}
                   className="fill-black"
-                  fontSize={18}
+                  fontSize={16}
                 />
               </Bar>
             </BarChart>
