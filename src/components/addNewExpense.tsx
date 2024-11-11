@@ -1,8 +1,12 @@
-import { getBalance, getTotalExpenses } from "@/functions/getBalanceAndExpense";
-import { handleCreateExpense } from "@/functions/handleCreateExpense";
+import { getBalance, getTotalExpenses } from "@/functions/balanceAndExpenses";
+import { handleCreateExpense } from "@/functions/expenseAndBalanceHandlers";
 import type { ExpenseData } from "@/types/Types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { CircleDollarSign } from "lucide-react";
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -21,17 +25,18 @@ import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 const createUserFormSchema = z.object({
   local: z
     .string()
-    .nonempty("Digite um local")
+    .nonempty("O campo local é obrigatório")
     .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, "Apenas letras são permitidas"),
   expense: z
     .string()
-    .nonempty("Digite um valor")
+    .nonempty("O campo valor é obrigatório")
     .regex(
       /^-?\d+([.,]\d+)?$/,
       "Deve ser um número válido e sem letras, exemplo: 333,33"
     ),
   tag: z.string().nonempty("Escolha uma tag"),
   paymentMethod: z.enum(["crédito", "débito", "dinheiro"]),
+  paymentDate: z.string().nonempty("O campo data é obrigatório"),
 });
 
 type createUserFormData = z.infer<typeof createUserFormSchema>;
@@ -52,29 +57,55 @@ export function AddNewExpense({
     handleSubmit,
     reset,
     control,
+
     formState: { errors },
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
+  const [startDate, setStartDate] = useState<Date | null>(null);
 
   const onSubmit = (data: createUserFormData) => {
     const balance = getBalance();
 
-    if (Number.parseFloat(data.expense.replace(",", ".")) > balance) {
-      toast.error("Não foi possivel finalizar a compra por falta de saldo.");
-      return 0;
+    switch (data.paymentMethod) {
+      case "crédito":
+        toast.success("Novo gasto foi adicionado!");
+
+        break;
+      case "débito":
+        if (Number.parseFloat(data.expense.replace(",", ".")) >= balance) {
+          toast.error(
+            "Não foi possivel finalizar a compra por falta de saldo."
+          );
+          return 0;
+        }
+        updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
+        toast.success("Novo gasto foi adicionado!");
+
+        break;
+      case "dinheiro":
+        if (Number.parseFloat(data.expense.replace(",", ".")) >= balance) {
+          toast.error(
+            "Não foi possivel finalizar a compra por falta de saldo."
+          );
+          return 0;
+        }
+        updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
+        break;
     }
 
-    handleCreateExpense(data.tag, data.expense, data.local, data.paymentMethod);
+    handleCreateExpense(
+      data.tag,
+      data.expense,
+      data.local,
+      data.paymentMethod,
+      data.paymentDate
+    );
 
     const newTotal = getTotalExpenses();
     setExpense(newTotal);
 
-    updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
-
     addNewExpense(data);
-
-    toast.success("Novo gasto foi adicionado!");
 
     reset();
   };
@@ -84,7 +115,7 @@ export function AddNewExpense({
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-lg flex flex-col gap-2 transition-all text-primary hover:text-rose-700"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-primary hover:text-rose-700"
         >
           <span>
             <CircleDollarSign size={34} className="text-rose-700" />
@@ -106,14 +137,13 @@ export function AddNewExpense({
           <div className="flex flex-col w-full items-center gap-4">
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="local" className="font-medium">
-                Com oque gastou ?
+                Com o que gastou?
               </label>
               <input
-                className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className="rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
-                placeholder="Digite com oque gastou..."
+                placeholder="Digite com o que gastou..."
                 {...register("local")}
-                required
               />
               {errors.local && (
                 <span className="text-red-600">{errors.local.message}</span>
@@ -121,14 +151,13 @@ export function AddNewExpense({
             </div>
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="expense" className="font-medium">
-                Quanto gastou ?
+                Quanto gastou?
               </label>
               <input
-                className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className="rounded-lg p-2 w-full border border-[#C2D2F2]"
                 type="text"
                 placeholder="Digite quanto gastou..."
                 {...register("expense")}
-                required
               />
               {errors.expense && (
                 <span className="text-red-600">{errors.expense.message}</span>
@@ -136,7 +165,6 @@ export function AddNewExpense({
             </div>
             <div className="flex flex-col gap-3 w-full">
               <span className="font-medium">Forma de pagamento</span>
-
               <Controller
                 name="paymentMethod"
                 control={control}
@@ -151,25 +179,23 @@ export function AddNewExpense({
                       <RadioGroupItem
                         value="débito"
                         id="debit"
-                        className="text-sky-600"
+                        className="text-cyan-900"
                       />
                       <label htmlFor="debit">Débito</label>
                     </div>
-
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="crédito"
                         id="credit"
-                        className="text-violet-600"
+                        className="text-indigo-900"
                       />
                       <label htmlFor="credit">Crédito</label>
                     </div>
-
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="dinheiro"
                         id="cash"
-                        className="text-lime-500"
+                        className="text-emerald-900"
                       />
                       <label htmlFor="cash">Dinheiro</label>
                     </div>
@@ -184,9 +210,8 @@ export function AddNewExpense({
             </div>
             <select
               id="tag"
-              className=" rounded-lg p-2 w-full border border-[#C2D2F2]"
+              className="rounded-lg p-2 w-full border border-[#C2D2F2]"
               {...register("tag")}
-              required
             >
               <option value="">-- Selecione a tag --</option>
               <option value="alimentação">alimentação</option>
@@ -200,15 +225,36 @@ export function AddNewExpense({
               <option value="lazer">lazer</option>
               <option value="outros">outros</option>
             </select>
+            <div className="flex flex-col gap-3 w-full">
+              <label htmlFor="date" className="font-medium">
+                Data do pagamento
+              </label>
+              <input type="hidden" required {...register("paymentDate")} />
+              <Controller
+                name="paymentDate"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    className="rounded-lg p-2 w-full border border-[#C2D2F2]"
+                    id="date"
+                    selected={startDate}
+                    onChange={(date: Date | null) => {
+                      setStartDate(date);
+                      field.onChange(date ? format(date, "dd/MM/yyyy") : "");
+                    }}
+                    dateFormat="dd/MM/yyyy"
+                  />
+                )}
+              />
+              {errors.paymentDate && (
+                <span className="text-red-600">
+                  {errors.paymentDate.message}
+                </span>
+              )}
+            </div>
           </div>
-          <DialogFooter className="w-full">
-            <Button
-              type="submit"
-              onClick={() => {}}
-              className="bg-my-body text-secondary rounded-md p-2 w-full border border-[#C2D2F2]"
-            >
-              Atualizar gastos
-            </Button>
+          <DialogFooter>
+            <Button type="submit">Adicionar novo gasto</Button>
           </DialogFooter>
         </form>
       </DialogContent>

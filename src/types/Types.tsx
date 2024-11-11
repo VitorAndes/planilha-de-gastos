@@ -1,6 +1,11 @@
 export type ExpenseData = {
-  paymentMethod: string;
   expense: string;
+  paymentMethod: string;
+};
+
+export type balanceData = {
+  balance: string;
+  paymentMethod: string;
 };
 
 export type chartDataType = {
@@ -13,4 +18,5 @@ export type ExpenseType = {
   expense: string;
   tag: string;
   paymentMethod: string;
+  paymentDate: string;
 };

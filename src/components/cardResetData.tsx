@@ -21,7 +21,7 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-lg flex flex-col gap-2 transition-all text-primary hover:text-zinc-700"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-primary hover:text-zinc-700"
         >
           <span>
             <RotateCwIcon size={34} className="text-zinc-700" />

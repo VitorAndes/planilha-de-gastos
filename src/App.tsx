@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { AddNewBalance } from "./components/addNewBalance";
 import { AddNewExpense } from "./components/addNewExpense";
 
@@ -13,80 +13,117 @@ import { ExpenseTable } from "./components/expenseTable";
 import {
   getAllExpenses,
   getTotalExpenses,
-} from "./functions/getBalanceAndExpense";
+} from "./functions/balanceAndExpenses";
 import type { ExpenseData, ExpenseType } from "./types/Types";
 
-export function App() {
-  const [balance, setBalance] = useState(0);
-  const [expense, setExpense] = useState<ExpenseData[]>([]);
-  const [expensesList, setExpensesList] = useState<ExpenseType[]>([]);
+export function useLocalStorageState(key: string, initialValue = 0) {
+  const [value, setValue] = useState(() => {
+    const stored = localStorage.getItem(key);
+    return stored ? Number.parseFloat(stored) : initialValue;
+  });
 
-  useEffect(() => {
-    const storedBalance = localStorage.getItem("balance");
-    setBalance(storedBalance ? Number(storedBalance) : 0);
+  const updateValue = useCallback(
+    (amount: number) => {
+      setValue((prev) => {
+        const newValue = prev + amount;
+        localStorage.setItem(key, newValue.toString());
+        return newValue;
+      });
+    },
+    [key]
+  );
 
-    const expenseValue: ExpenseData[] = getTotalExpenses();
-    setExpense(expenseValue);
+  return [value, setValue, updateValue] as const;
+}
 
-    const allExpenses = getAllExpenses();
-    setExpensesList(allExpenses);
+export function useExpenses() {
+  const [expenses, setExpenses] = useState<ExpenseData[]>(() =>
+    getTotalExpenses()
+  );
+  const [expensesList, setExpensesList] = useState<ExpenseType[]>(() =>
+    getAllExpenses()
+  );
+
+  const addExpense = useCallback((newExpense: ExpenseType) => {
+    setExpensesList((prev) => [...prev, newExpense]);
   }, []);
 
-  const handleResetData = () => {
+  const refreshExpenses = useCallback(() => {
+    setExpenses(getTotalExpenses());
+    setExpensesList(getAllExpenses());
+  }, []);
+
+  const calculateTotalExpenses = useCallback(() => {
+    return expenses
+      .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
+      .toFixed(2)
+      .replace(".", ",");
+  }, [expenses]);
+
+  const calculateExpensesByType = useCallback(
+    (type: string) => {
+      return expenses
+        .filter((item) => item.paymentMethod === type)
+        .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
+        .toFixed(2)
+        .replace(".", ",");
+    },
+    [expenses]
+  );
+
+  return {
+    setExpenses,
+    expensesList,
+    addExpense,
+    refreshExpenses,
+    calculateTotalExpenses,
+    calculateExpensesByType,
+  };
+}
+
+// App.tsx
+export function App() {
+  const [balance, setBalance, updateBalance] = useLocalStorageState("balance");
+
+  const {
+    setExpenses,
+    expensesList,
+    addExpense,
+    refreshExpenses,
+    calculateTotalExpenses,
+    calculateExpensesByType,
+  } = useExpenses();
+
+  const handleResetData = useCallback(() => {
     localStorage.clear();
     setBalance(0);
-    setExpense([]);
-    setExpensesList([]);
-
+    setExpenses([]);
+    refreshExpenses();
     toast.success("Os dados foram resetados");
-  };
+  }, [setBalance, setExpenses, refreshExpenses]);
 
-  const updateBalance = (newExpense: number) => {
-    setBalance((prevBalance) => {
-      const updatedBalance = prevBalance + newExpense;
-      localStorage.setItem("balance", updatedBalance.toString());
-      return updatedBalance;
-    });
-  };
+  const descountBalance = useCallback(
+    (amount: number) => {
+      updateBalance(-amount);
+    },
+    [updateBalance]
+  );
 
-  const descountBalance = (newExpense: number) => {
-    setBalance((prevBalance) => {
-      const updatedBalance = prevBalance - newExpense;
-      localStorage.setItem("balance", updatedBalance.toString());
-      return updatedBalance;
-    });
-  };
-
-  const addNewExpense = (newExpense: ExpenseType) => {
-    setExpensesList((prevExpenses) => [...prevExpenses, newExpense]);
-  };
-
-  const totalExpensesValue = expense
-    .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
-    .toFixed(2)
-    .replace(".", ",");
-
-  const totalCredit = expense
-    .filter((item) => item.paymentMethod === "crédito")
-    .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
-    .toFixed(2)
-    .replace(".", ",");
-
-  const totalDebit = expense
-    .filter((item) => item.paymentMethod === "débito")
-    .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
-    .toFixed(2)
-    .replace(".", ",");
+  const totalExpensesValue = calculateTotalExpenses();
+  const totalExpensesCredit = calculateExpensesByType("crédito");
+  const totalExpenseDebit = calculateExpensesByType("débito");
 
   return (
-    <div className="flex flex-col justify-start items-center m-auto max-w-7xl pb-28 min-h-screen">
+    <div className="flex flex-col justify-start items-center m-auto w-full md:max-w-7xl pb-28 min-h-screen">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-primary to-text-secondary w-full h-24 rounded-xl p-4 mb-8 shadow-sm shadow-violet-300"
+        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-primary to-text-secondary w-full md:h-24 rounded-xl p-4 mb-8 shadow-md shadow-white"
       >
-        <h1 className="text-3xl -tracking-tighter font-bold">AndesFinance</h1>
+        <h1 className="text-xl md:text-3xl -tracking-tighter font-bold">
+          AndesFinance
+        </h1>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -97,15 +134,15 @@ export function App() {
           <AddNewBalance updateBalance={updateBalance} />
           <CardResetData handleResetData={handleResetData} />
           <AddNewExpense
-            setExpense={setExpense}
+            setExpense={setExpenses}
             updateBalance={descountBalance}
-            addNewExpense={addNewExpense}
+            addNewExpense={addExpense}
           />
         </motion.div>
       </motion.div>
 
       <div className="flex flex-col w-full">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -123,7 +160,7 @@ export function App() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex-1"
           >
-            <CardMoney revenue="Gastos" value={totalExpensesValue} />
+            <CardMoney revenue="Pagamentos" value={totalExpensesValue} />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -131,7 +168,7 @@ export function App() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex-1"
           >
-            <CardPaymentMethod revenue="Débito" value={totalDebit} />
+            <CardPaymentMethod revenue="Fatura" value={totalExpensesCredit} />
           </motion.div>
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -139,11 +176,11 @@ export function App() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="flex-1"
           >
-            <CardPaymentMethod revenue="Crédito" value={totalCredit} />
+            <CardPaymentMethod revenue="Débito" value={totalExpenseDebit} />
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}

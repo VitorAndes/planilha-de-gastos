@@ -7,7 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { getAllExpenses } from "@/functions/getBalanceAndExpense";
+import { getAllExpenses } from "@/functions/balanceAndExpenses";
 import { useEffect, useState } from "react";
 import { LoadingSpinner } from "./isLoading";
 
@@ -83,10 +83,10 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-primary text-primary h-full shadow-sm shadow-violet-300">
+    <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-primary text-primary h-full shadow-md shadow-white">
       <CardHeader className="text-center pt-0">
         <CardTitle className="text-lg font-bold -tracking-tighter">
-          Total de gastos
+          Lugares gastos
         </CardTitle>
       </CardHeader>
       <CardContent className="h-full w-full p-0">

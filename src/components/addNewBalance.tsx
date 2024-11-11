@@ -1,4 +1,4 @@
-import { handleNewBalance } from "@/functions/handleNewBalanceAndExpense";
+import { handleNewBalance } from "@/functions/expenseAndBalanceHandlers";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Wallet } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -41,10 +41,13 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
     resolver: zodResolver(createUserFormSchema),
   });
 
-  const onSubmit = (data: createUserFormData) => {
-    handleNewBalance(data.balance);
-    updateBalance(Number.parseFloat(data.balance.replace(",", ".")));
-    toast.success("Novo saldo adicionado!");
+  const onSubmit = ({ balance }: createUserFormData) => {
+    const formattedBalance = Number.parseFloat(balance.replace(",", "."));
+
+    handleNewBalance(balance);
+    updateBalance(formattedBalance);
+    toast.success(`Novo saldo adicionado! ${balance}`);
+
     reset();
   };
 
@@ -53,7 +56,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-lg flex flex-col gap-2 transition-all text-my-body hover:text-emerald-600"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-my-body hover:text-emerald-600"
         >
           <span>
             <Wallet size={34} className="text-emerald-700" />
