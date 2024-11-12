@@ -10,6 +10,7 @@ import { CardMoney } from "./components/cardMoney";
 import { CardPaymentMethod } from "./components/cardPaymentMethod";
 import { CardResetData } from "./components/cardResetData";
 import { ExpenseTable } from "./components/expenseTable";
+import { Footer } from "./components/footer";
 import {
   getAllExpenses,
   getTotalExpenses,
@@ -210,6 +211,7 @@ export function App() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
