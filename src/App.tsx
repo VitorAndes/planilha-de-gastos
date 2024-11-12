@@ -119,7 +119,7 @@ export function App() {
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-primary to-text-secondary w-full md:h-24 rounded-xl p-4 mb-8 shadow-md shadow-white"
+        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-tertiary to-text-secondary w-full md:h-24 rounded-xl p-4 mb-8 shadow-md shadow-white"
       >
         <h1 className="text-xl md:text-3xl -tracking-tighter font-bold">
           AndesFinance
