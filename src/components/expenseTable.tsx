@@ -14,7 +14,7 @@ interface ExpenseTableProps {
 
 export function ExpenseTable({ expenses }: ExpenseTableProps) {
   return (
-    <div className="rounded-md py-4 bg-gradient-to-b from-text-secondary to-my-tertiary text-primary flex flex-col  gap-2 flex-1 h-full shadow-md shadow-white">
+    <div className="md:rounded-md py-4 bg-gradient-to-b from-text-secondary to-my-tertiary text-primary flex flex-col  gap-2 flex-1 h-full shadow-md shadow-black">
       <div className="pb-6 px-4">
         <h1 className="text-lg font-bold -tracking-tighter">Transações</h1>
       </div>

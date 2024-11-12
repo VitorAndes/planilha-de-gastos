@@ -123,7 +123,7 @@ export function AddNewExpense({
           Novo gasto
         </Button>
       </DialogTrigger>
-      <DialogContent className="text-primary backdrop-blur">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Novo gasto</DialogTitle>
           <DialogDescription>

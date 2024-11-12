@@ -64,7 +64,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
           Novo saldo
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[525px] text-my-body backdrop-blur">
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Novo saldo</DialogTitle>
           <DialogDescription>

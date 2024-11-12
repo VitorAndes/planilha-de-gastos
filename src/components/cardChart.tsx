@@ -83,7 +83,7 @@ export function CardChart() {
   } satisfies ChartConfig;
 
   return (
-    <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-tertiary text-primary h-full shadow-md shadow-white">
+    <Card className="flex gap-4 p-4 flex-col bg-gradient-to-b from-text-secondary to-my-tertiary text-primary h-full shadow-md shadow-black">
       <CardHeader className="text-center pt-0">
         <CardTitle className="text-lg font-bold -tracking-tighter">
           Lugares gastos

@@ -59,7 +59,7 @@ export function CardChartPayments() {
   }, []);
 
   return (
-    <Card className="flex flex-col flex-1 justify-center p-10 gap-2 bg-gradient-to-b from-text-secondary to-my-tertiary text-primary h-96 shadow-md shadow-white">
+    <Card className="flex flex-col flex-1 justify-center p-10 gap-2 bg-gradient-to-b from-text-secondary to-my-tertiary text-primary h-96 shadow-md shadow-black">
       <CardHeader className="text-center pt-0">
         <CardTitle className="text-lg font-bold -tracking-tighter">
           Métodos de pagamento

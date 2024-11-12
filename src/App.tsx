@@ -115,12 +115,12 @@ export function App() {
   const totalExpenseDebit = calculateExpensesByType("débito");
 
   return (
-    <div className="flex flex-col justify-start items-center m-auto w-full md:max-w-7xl pb-28 min-h-screen">
+    <div className="flex flex-col justify-start items-center m-auto w-full md:max-w-7xl min-h-screen ">
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-tertiary to-text-secondary w-full md:h-24 rounded-xl p-4 mb-8 shadow-md shadow-white"
+        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-tertiary to-text-secondary w-full md:h-24 md:rounded-lg p-4 mb-8 shadow-md shadow-black"
       >
         <h1 className="text-xl md:text-3xl -tracking-tighter font-bold">
           AndesFinance
@@ -143,7 +143,7 @@ export function App() {
       </motion.div>
 
       <div className="flex flex-col w-full">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 p-1">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
