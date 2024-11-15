@@ -217,7 +217,7 @@ export function App() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="col-span-4"
             >
-              <ExpenseTable expenses={expensesList} />
+              <ExpenseTable />
             </motion.div>
           </div>
         </div>
