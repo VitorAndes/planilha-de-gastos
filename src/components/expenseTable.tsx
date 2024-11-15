@@ -1,4 +1,6 @@
-import type { ExpenseType } from "@/types/Types";
+import { getAllExpenses } from "@/functions/balanceAndExpenses";
+import { useState } from "react";
+import { ExpenseTableFilters } from "./expenseTableFilters";
 import { Card } from "./ui/card";
 import {
   Table,
@@ -9,15 +11,14 @@ import {
   TableRow,
 } from "./ui/table";
 
-interface ExpenseTableProps {
-  expenses: ExpenseType[];
-}
+export function ExpenseTable() {
+  const [filteredExpenses, setFilteredExpenses] = useState(getAllExpenses());
 
-export function ExpenseTable({ expenses }: ExpenseTableProps) {
   return (
     <Card className="py-4 flex flex-col rounded-md gap-2 flex-1 h-full  ">
-      <div className="pb-6 px-4">
-        <h1 className="text-lg font-bold -tracking-tighter">Transações</h1>
+      <div className="pb-6 px-4 w-full">
+        <h1 className="text-lg mb-4 font-bold -tracking-tighter">Transações</h1>
+        <ExpenseTableFilters onFilterChange={setFilteredExpenses} />
       </div>
       <Table>
         <TableHeader>
@@ -30,7 +31,7 @@ export function ExpenseTable({ expenses }: ExpenseTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody className="text-color-secondary">
-          {expenses.map(
+          {filteredExpenses.map(
             ({ expense, local, tag, paymentMethod, paymentDate }, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
               <TableRow key={index} className="flex">

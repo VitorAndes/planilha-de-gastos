@@ -114,7 +114,13 @@ export function CardChart() {
                 tickFormatter={(value) => value.slice(0, 3)}
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Bar dataKey="expense" fill="#119083" radius={8}>
+              <Bar
+                stroke="#0E0E11"
+                strokeWidth={2}
+                dataKey="expense"
+                fill="#119083"
+                radius={8}
+              >
                 <LabelList position="top" offset={12} fontSize={16} />
               </Bar>
             </BarChart>

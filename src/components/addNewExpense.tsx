@@ -21,6 +21,15 @@ import {
   DialogTrigger,
 } from "./ui/dialog";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 const createUserFormSchema = z.object({
   local: z
@@ -34,7 +43,7 @@ const createUserFormSchema = z.object({
       /^-?\d+([.,]\d+)?$/,
       "Deve ser um número válido e sem letras, exemplo: 333,33"
     ),
-  tag: z.string().nonempty("Escolha uma tag"),
+  tag: z.string().nonempty("O campo tag é obrigatório"),
   paymentMethod: z.enum(["crédito", "débito", "dinheiro"]),
   paymentDate: z.string().nonempty("O campo data é obrigatório"),
 });
@@ -57,13 +66,11 @@ export function AddNewExpense({
     handleSubmit,
     reset,
     control,
-
     formState: { errors },
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
   });
   const [startDate, setStartDate] = useState<Date | null>(null);
-
   const onSubmit = (data: createUserFormData) => {
     const balance = getBalance();
 
@@ -149,6 +156,38 @@ export function AddNewExpense({
                 <span className="text-red-600">{errors.local.message}</span>
               )}
             </div>
+            <Controller
+              name="tag"
+              control={control}
+              render={({ field }) => (
+                <Select onValueChange={field.onChange}>
+                  <SelectTrigger className="rounded-lg bg-white p-2 w-full text-black">
+                    <SelectValue placeholder="-- Selecione uma tag --" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>Tags</SelectLabel>
+                      <SelectItem value="alimentação">alimentação</SelectItem>
+                      <SelectItem value="cosméticos">cosméticos</SelectItem>
+                      <SelectItem value="transporte">transporte</SelectItem>
+                      <SelectItem value="assinatura">assinatura</SelectItem>
+                      <SelectItem value="eletrônicos">eletrônicos</SelectItem>
+                      <SelectItem value="jogos">jogos</SelectItem>
+                      <SelectItem value="emergências">emergências</SelectItem>
+                      <SelectItem value="consultas">
+                        consultas de saúde
+                      </SelectItem>
+                      <SelectItem value="lazer">lazer</SelectItem>
+                      <SelectItem value="outros">outros</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.tag && (
+              <span className="text-red-600">{errors.tag.message}</span>
+            )}
+
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="expense" className="font-medium">
                 Quanto gastou?
@@ -208,30 +247,13 @@ export function AddNewExpense({
                 </span>
               )}
             </div>
-            <select
-              id="tag"
-              className="rounded-lg p-2 w-full text-black"
-              {...register("tag")}
-            >
-              <option value="">-- Selecione a tag --</option>
-              <option value="alimentação">alimentação</option>
-              <option value="cosméticos">cosméticos</option>
-              <option value="transporte">transporte</option>
-              <option value="assinatura">assinatura</option>
-              <option value="eletrônicos">eletrônicos</option>
-              <option value="jogos">jogos</option>
-              <option value="emergências">emergências</option>
-              <option value="consultas">consultas de saúde</option>
-              <option value="lazer">lazer</option>
-              <option value="outros">outros</option>
-            </select>
+
             <div className="flex flex-col gap-3 w-full">
               <label htmlFor="date" className="font-medium">
                 Data do pagamento
               </label>
-              <input type="hidden" required {...register("paymentDate")} />
               <Controller
-                name="paymentDate"
+                {...register("paymentDate")}
                 control={control}
                 render={({ field }) => (
                   <DatePicker

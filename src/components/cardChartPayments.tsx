@@ -97,7 +97,7 @@ export function CardChartPayments() {
                 dataKey="expense"
                 nameKey="paymentMethod"
                 stroke="#0E0E11"
-                strokeWidth={5}
+                strokeWidth={2}
                 outerRadius={80}
                 innerRadius={50}
                 labelLine={false}

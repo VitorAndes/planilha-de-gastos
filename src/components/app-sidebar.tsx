@@ -62,7 +62,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarFooter className="flex flex-row items-center justify-between">
-          <ul className="flex items-center text-color-secondary w-full justify-between md:justify-normal gap-4 ">
+          <ul className="flex items-center text-color-secondary w-full gap-4 ">
             <li className="hover:text-sky-500 hover:scale-110 transition-all">
               <a href="https://www.linkedin.com/in/vitor-andes-dos-santos-3265ba243/">
                 <Linkedin size={32} className="" />
