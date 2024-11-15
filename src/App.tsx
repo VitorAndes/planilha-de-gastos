@@ -88,7 +88,6 @@ export function App() {
 
   const {
     setExpenses,
-    expensesList,
     addExpense,
     refreshExpenses,
     calculateTotalExpenses,
