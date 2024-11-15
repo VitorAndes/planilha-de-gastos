@@ -36,7 +36,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 right-0 top-0 bottom-0 w-[400px] h-screen border-l border-white bg-gradient-to-t from-my-tertiary to-text-secondary p-12 md:p-8 shadow-lg duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-right-1/2  data-[state=open]:slide-in-from-right-1/2 rounded-lg space-y-4",
+        "fixed z-50 right-0 top-0 bottom-0 w-[400px] h-screen border-l border-color-secondary bg-color-card p-12 md:p-8 shadow-lg duration-500 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-right-1/2  data-[state=open]:slide-in-from-right-1/2 rounded-lg space-y-4",
         className
       )}
       {...props}
@@ -85,7 +85,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg font-bold tracking-wider", className)}
+    className={cn(
+      "text-lg text-color-text font-bold tracking-wider",
+      className
+    )}
     {...props}
   />
 ));
@@ -97,7 +100,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
+    className={cn("text-sm text-color-secondary", className)}
     {...props}
   />
 ));

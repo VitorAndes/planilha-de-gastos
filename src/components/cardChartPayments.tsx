@@ -1,6 +1,6 @@
 import { getTotalExpenses } from "@/functions/balanceAndExpenses";
 import type { chartDataType } from "@/types/Types";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Pie, PieChart } from "recharts";
 import { LoadingSpinner } from "./isLoading";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -10,6 +10,14 @@ import {
   ChartLegend,
   ChartLegendContent,
 } from "./ui/chart";
+
+const REFRESH_INTERVAL = 5000;
+
+const PAYMENT_COLORS = {
+  débito: "#0891b2",
+  crédito: "#4f46e5",
+  dinheiro: "#059669",
+} as const;
 
 const chartConfig = {
   crédito: {
@@ -26,62 +34,77 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const getPaymentColor = (
+  paymentMethod: keyof typeof PAYMENT_COLORS
+): string => {
+  return PAYMENT_COLORS[paymentMethod] || PAYMENT_COLORS.dinheiro;
+};
+
+const formatExpenseValue = (expense: string): number => {
+  return Number.parseFloat(expense.replace(",", "."));
+};
+
 export function CardChartPayments() {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<chartDataType[]>([]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const chartData = getTotalExpenses();
-
-      const getColor = (paymentMethod: string) => {
-        if (paymentMethod === "débito") {
-          return "#164e63";
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else if (paymentMethod === "crédito") {
-          return "#4f46e5";
-          // biome-ignore lint/style/noUselessElse: <explanation>
-        } else {
-          return "#059669";
-        }
-      };
-
-      const formattedChartData = chartData.map((item) => ({
+  const processChartData = useCallback(
+    (rawData: ReturnType<typeof getTotalExpenses>) => {
+      return rawData.map((item) => ({
         ...item,
-        expense: Number.parseFloat(item.expense.replace(",", ".")),
-        fill: getColor(item.paymentMethod),
+        expense: formatExpenseValue(item.expense),
+        fill: getPaymentColor(
+          item.paymentMethod as keyof typeof PAYMENT_COLORS
+        ),
       }));
+    },
+    []
+  );
 
+  const updateChartData = useCallback(() => {
+    try {
+      const rawData = getTotalExpenses();
+      const formattedData = processChartData(rawData);
+      setChartData(formattedData);
       setIsLoading(false);
-      setChartData(formattedChartData);
-    }, 5000);
+    } catch (error) {
+      console.error("Error updating payment data:", error);
+      setIsLoading(false);
+    }
+  }, [processChartData]);
+
+  useEffect(() => {
+    updateChartData();
+
+    const interval = setInterval(updateChartData, REFRESH_INTERVAL);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [updateChartData]);
 
   return (
-    <Card className="flex flex-col flex-1 justify-center p-10 gap-2 bg-gradient-to-b from-text-secondary to-my-tertiary text-primary h-96 shadow-md shadow-black">
-      <CardHeader className="text-center pt-0">
-        <CardTitle className="text-lg font-bold -tracking-tighter">
-          Métodos de pagamento
-        </CardTitle>
+    <Card className="h-full p-4">
+      <CardHeader>
+        <CardTitle>Métodos de pagamento</CardTitle>
       </CardHeader>
-      <CardContent className="w-full h-full p-0">
+      <CardContent>
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          <ChartContainer config={chartConfig} className="w-full h-full p-0">
+          <ChartContainer config={chartConfig}>
             <PieChart style={{ fontSize: 24 }}>
               <Pie
                 data={chartData}
                 dataKey="expense"
                 nameKey="paymentMethod"
-                outerRadius={100}
-                innerRadius={74}
+                stroke="#0E0E11"
+                strokeWidth={5}
+                outerRadius={80}
+                innerRadius={50}
                 labelLine={false}
               />
               <ChartLegend
                 content={<ChartLegendContent nameKey="paymentMethod" />}
-                className="flex items-center flex-wrap"
+                className="truncate"
               />
             </PieChart>
           </ChartContainer>

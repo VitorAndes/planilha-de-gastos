@@ -21,12 +21,12 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-primary hover:text-zinc-700"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all "
         >
-          <span>
-            <RotateCwIcon size={34} className="text-zinc-700" />
-          </span>
-          Resetar
+          <RotateCwIcon
+            size={34}
+            className="text-zinc-700 hover:text-zinc-300 hover:scale-110"
+          />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -43,7 +43,7 @@ export function CardResetData({ handleResetData }: CardResetDataProps) {
           <DialogClose
             type="button"
             onClick={handleResetData}
-            className="bg-my-body text-secondary rounded-md p-2 w-full border border-zinc-400"
+            className="bg-color-card text-color-accent rounded-md p-2 w-full border border-color-secondary"
           >
             Sim
           </DialogClose>

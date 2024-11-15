@@ -115,12 +115,12 @@ export function AddNewExpense({
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-primary hover:text-rose-700"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all"
         >
-          <span>
-            <CircleDollarSign size={34} className="text-rose-700" />
-          </span>
-          Novo gasto
+          <CircleDollarSign
+            size={34}
+            className="text-rose-700 hover:text-rose-300 hover:scale-110"
+          />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -132,7 +132,7 @@ export function AddNewExpense({
         </DialogHeader>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center gap-4 py-4"
+          className="flex flex-col gap-4 py-4"
         >
           <div className="flex flex-col w-full items-center gap-4">
             <div className="flex flex-col gap-3 w-full">
@@ -140,7 +140,7 @@ export function AddNewExpense({
                 Com o que gastou?
               </label>
               <input
-                className="rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className="rounded-lg p-2 w-full text-black"
                 type="text"
                 placeholder="Digite com o que gastou..."
                 {...register("local")}
@@ -154,7 +154,7 @@ export function AddNewExpense({
                 Quanto gastou?
               </label>
               <input
-                className="rounded-lg p-2 w-full border border-[#C2D2F2]"
+                className="rounded-lg p-2 w-full text-black"
                 type="text"
                 placeholder="Digite quanto gastou..."
                 {...register("expense")}
@@ -210,7 +210,7 @@ export function AddNewExpense({
             </div>
             <select
               id="tag"
-              className="rounded-lg p-2 w-full border border-[#C2D2F2]"
+              className="rounded-lg p-2 w-full text-black"
               {...register("tag")}
             >
               <option value="">-- Selecione a tag --</option>
@@ -235,7 +235,7 @@ export function AddNewExpense({
                 control={control}
                 render={({ field }) => (
                   <DatePicker
-                    className="rounded-lg p-2 w-full border border-[#C2D2F2]"
+                    className="text-black rounded-lg p-2 w-full"
                     id="date"
                     selected={startDate}
                     onChange={(date: Date | null) => {
@@ -254,7 +254,12 @@ export function AddNewExpense({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Adicionar novo gasto</Button>
+            <Button
+              type="submit"
+              className="bg-color-card text-color-accent rounded-lg p-2 w-full border border-color-secondary"
+            >
+              Adicionar novo gasto
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

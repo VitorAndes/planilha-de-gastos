@@ -46,7 +46,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
 
     handleNewBalance(balance);
     updateBalance(formattedBalance);
-    toast.success(`Novo saldo adicionado! ${balance}`);
+    toast.success("Novo saldo adicionado!");
 
     reset();
   };
@@ -56,12 +56,12 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
       <DialogTrigger asChild>
         <Button
           variant={"link"}
-          className="text-sm md:text-lg flex flex-col gap-2 transition-all text-my-body hover:text-emerald-600"
+          className="text-sm md:text-lg flex flex-col gap-2 transition-all hover:scale-110"
         >
-          <span>
-            <Wallet size={34} className="text-emerald-700" />
-          </span>
-          Novo saldo
+          <Wallet
+            size={34}
+            className="text-emerald-700 hover:text-emerald-300"
+          />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -73,11 +73,11 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
         </DialogHeader>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col items-center gap-4 py-4 "
+          className="flex flex-col text-color-text items-center gap-4 py-4 "
         >
           <div className="flex flex-col w-full gap-2">
             <input
-              className="rounded-lg p-2 w-full border"
+              className="rounded-lg p-2 w-full border text-black"
               type="text"
               placeholder="Adicionar Saldo"
               {...register("balance")}
@@ -90,7 +90,7 @@ export function AddNewBalance({ updateBalance }: AddNewBalanceProps) {
             <Button
               type="submit"
               onClick={() => {}}
-              className="bg-my-body text-secondary rounded-lg p-2 w-full border"
+              className="bg-color-card text-color-accent rounded-lg p-2 w-full border border-color-secondary"
             >
               Atualizar Saldo
             </Button>

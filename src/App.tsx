@@ -10,7 +10,7 @@ import { CardMoney } from "./components/cardMoney";
 import { CardPaymentMethod } from "./components/cardPaymentMethod";
 import { CardResetData } from "./components/cardResetData";
 import { ExpenseTable } from "./components/expenseTable";
-import { Footer } from "./components/footer";
+import { SidebarTrigger } from "./components/ui/sidebar";
 import {
   getAllExpenses,
   getTotalExpenses,
@@ -110,108 +110,118 @@ export function App() {
     [updateBalance]
   );
 
+  function buyMeACoffee() {
+    toast.info("Disponivel em breve!");
+  }
+
   const totalExpensesValue = calculateTotalExpenses();
   const totalExpensesCredit = calculateExpensesByType("crédito");
   const totalExpenseDebit = calculateExpensesByType("débito");
 
   return (
-    <div className="flex flex-col justify-start items-center m-auto w-full md:max-w-7xl min-h-screen ">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="flex items-center justify-center lg:justify-between bg-gradient-to-t from-my-tertiary to-text-secondary w-full md:h-24 md:rounded-lg p-4 mb-8 shadow-md shadow-black"
-      >
-        <h1 className="text-xl md:text-3xl -tracking-tighter font-bold">
-          AndesFinance
-        </h1>
-
+    <div className="flex justify-center gap-2 w-full min-h-screen ">
+      <div className=" md:p-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className=" flex gap-2 px-2 py-10 lg:gap-2 h-16 justify-center lg:justify-end items-center flex-1 lg:static bottom-0 left-0 fixed z-10 rounded-t-md lg:rounded-t-none bg-my-primary/70 border-t-[#C2D2F2] border-t backdrop-blur lg:backdrop-blur-none lg:bg-transparent lg:border-none w-full lg:w-0"
+          transition={{ duration: 0.5 }}
+          className="flex items-center justify-between bg-color-card shadow-md shadow-color-secondary w-full md:h-24 md:rounded-lg p-4 mb-8  "
         >
-          <AddNewBalance updateBalance={updateBalance} />
-          <CardResetData handleResetData={handleResetData} />
-          <AddNewExpense
-            setExpense={setExpenses}
-            updateBalance={descountBalance}
-            addNewExpense={addExpense}
-          />
-        </motion.div>
-      </motion.div>
-
-      <div className="flex flex-col w-full">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4 p-1">
+          <SidebarTrigger className="md:hidden" />
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex-1"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className=" flex gap-1 px-2 py-10 h-16 justify-center md:justify-start items-center flex-1 md:static bottom-0 right-0 fixed z-10 rounded-t-md md:rounded-t-none bg-color-card/90 border-t-color-secondary border-t backdrop-blur md:backdrop-blur-none md:bg-transparent md:border-none w-full md:w-0"
           >
-            <CardMoney
-              revenue="Saldo"
-              value={balance.toFixed(2).replace(".", ",")}
+            <AddNewBalance updateBalance={updateBalance} />
+            <CardResetData handleResetData={handleResetData} />
+            <AddNewExpense
+              setExpense={setExpenses}
+              updateBalance={descountBalance}
+              addNewExpense={addExpense}
             />
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex-1"
-          >
-            <CardMoney revenue="Pagamentos" value={totalExpensesValue} />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex-1"
-          >
-            <CardPaymentMethod revenue="Fatura" value={totalExpensesCredit} />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex-1"
-          >
-            <CardPaymentMethod revenue="Débito" value={totalExpenseDebit} />
-          </motion.div>
-        </div>
+          <button type="button" onClick={() => buyMeACoffee()} className="w-44">
+            {/* <a aria-disabled href="https://www.buymeacoffee.com/andescoffee"> */}
+            <img
+              src="https://img.buymeacoffee.com/button-api/?text=Buymeacoffee&emoji=☕&slug=andescoffee&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+              alt="buy me a coffee"
+            />
+            {/* </a> */}
+          </button>
+        </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="col-span-2"
-          >
-            <ExpenseTable expenses={expensesList} />
-          </motion.div>
-
-          <div className="grid grid-cols-2 col-span-2 gap-3">
+        <div className="flex flex-col w-full">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="col-span-2"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="col-span-1"
             >
-              <CardChart />
+              <CardMoney
+                revenue="Saldo"
+                value={balance.toFixed(2).replace(".", ",")}
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="col-span-2"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="col-span-1"
             >
-              <CardChartPayments />
+              <CardMoney revenue="Pagamentos" value={totalExpensesValue} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="col-span-1"
+            >
+              <CardPaymentMethod revenue="Fatura" value={totalExpensesCredit} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="col-span-1"
+            >
+              <CardPaymentMethod revenue="Débito" value={totalExpenseDebit} />
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 col-span-4 h-full gap-3">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="col-span-2"
+              >
+                <CardChart />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="col-span-2"
+              >
+                <CardChartPayments />
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="col-span-4"
+            >
+              <ExpenseTable expenses={expensesList} />
             </motion.div>
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
