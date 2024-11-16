@@ -4,6 +4,7 @@ import { AddNewExpense } from "./components/addNewExpense";
 
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { BuyMeACoffee } from "./components/buyMeACoffee";
 import { CardChart } from "./components/cardChart";
 import { CardChartPayments } from "./components/cardChartPayments";
 import { CardMoney } from "./components/cardMoney";
@@ -109,10 +110,6 @@ export function App() {
     [updateBalance]
   );
 
-  function buyMeACoffee() {
-    toast.info("Disponivel em breve!");
-  }
-
   const totalExpensesValue = calculateTotalExpenses();
   const totalExpensesCredit = calculateExpensesByType("crédito");
   const totalExpenseDebit = calculateExpensesByType("débito");
@@ -141,14 +138,7 @@ export function App() {
               addNewExpense={addExpense}
             />
           </motion.div>
-          <button type="button" onClick={() => buyMeACoffee()} className="w-44">
-            {/* <a aria-disabled href="https://www.buymeacoffee.com/andescoffee"> */}
-            <img
-              src="https://img.buymeacoffee.com/button-api/?text=Buymeacoffee&emoji=☕&slug=andescoffee&button_colour=40DCA5&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-              alt="buy me a coffee"
-            />
-            {/* </a> */}
-          </button>
+          <BuyMeACoffee />
         </motion.div>
 
         <div className="flex flex-col w-full">
