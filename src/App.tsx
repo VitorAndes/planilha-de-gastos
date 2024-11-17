@@ -128,7 +128,7 @@ export function App() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className=" flex gap-1 px-2 py-10 h-16 justify-center md:justify-start items-center flex-1 md:static bottom-0 right-0 fixed z-10 rounded-t-md md:rounded-t-none bg-color-card/90 border-t-color-secondary border-t backdrop-blur md:backdrop-blur-none md:bg-transparent md:border-none w-full md:w-0"
+            className="flex gap-1 px-2 py-10 h-16 justify-center md:justify-start items-center flex-1 md:static bottom-0 right-0 fixed z-10 rounded-t-md md:rounded-t-none bg-color-card/90 border-t-color-secondary border-t backdrop-blur md:backdrop-blur-none md:bg-transparent md:border-none w-full md:w-0"
           >
             <AddNewBalance updateBalance={updateBalance} />
             <CardResetData handleResetData={handleResetData} />
