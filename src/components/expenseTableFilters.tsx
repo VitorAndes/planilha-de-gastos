@@ -1,6 +1,6 @@
 import { getAllExpenses } from "@/functions/balanceAndExpenses";
 import type { ExpenseType } from "@/types/Types";
-import { Search, X } from "lucide-react";
+import { ListRestart, Search } from "lucide-react";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -124,8 +124,8 @@ export function ExpenseTableFilters({
         Filtrar resultados
       </Button>
       <Button type="button" variant="outline" onClick={clearFilters}>
-        <X className="mr-2 h-4 flex-1" />
-        Remover filtros
+        <ListRestart className="mr-2 h-4 flex-1" />
+        Atualizar lista
       </Button>
     </form>
   );

@@ -3,9 +3,13 @@ import {
   Home,
   Instagram,
   Linkedin,
+  LogIn,
+  LogOut,
   Moon,
+  Receipt,
   Settings,
   Sun,
+  Table,
 } from "lucide-react";
 
 import {
@@ -20,20 +24,41 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { useTheme } from "@/context/ThemeContext";
+import { Button } from "./ui/button";
 
-// Menu items.
-const items = [
+const navigationItem = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
+    title: "Planejador",
+    url: "/",
+    icon: Table,
+  },
+  {
+    title: "Dívidas",
+    url: "/",
+    icon: Receipt,
+  },
+];
+
+const clientHandleItem = [
+  {
+    title: "LogIn",
+    icon: LogIn,
+  },
+  {
+    title: "LogOut",
+    icon: LogOut,
+  },
+  {
     title: "Settings",
-    url: "#",
     icon: Settings,
   },
 ];
+
 export function AppSidebar() {
   const { theme, toggleTheme } = useTheme();
   return (
@@ -45,13 +70,27 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {navigationItem.map((item) => (
                 <SidebarMenuItem
                   key={item.title}
-                  className="text-color-secondary"
+                  className="text-color-secondary mb-1"
                 >
                   <SidebarMenuButton asChild>
                     <a href={item.url} aria-disabled>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+              <span className="border-b my-2 border-color-secondary" />
+              {clientHandleItem.map((item) => (
+                <SidebarMenuItem
+                  key={item.title}
+                  className="text-color-secondary mb-1"
+                >
+                  <SidebarMenuButton asChild>
+                    <a href="/" aria-disabled>
                       <item.icon />
                       <span>{item.title}</span>
                     </a>
@@ -79,13 +118,14 @@ export function AppSidebar() {
               </a>
             </li>
           </ul>
-          <button
+          <Button
+            variant={"secondary"}
             type="button"
             onClick={toggleTheme}
             className="hover:scale-110 dark:hover:text-yellow-500 hover:text-color-text transition-all"
           >
             {theme === "dark" ? <Sun size={32} /> : <Moon size={32} />}
-          </button>
+          </Button>
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>

@@ -157,7 +157,7 @@ export function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="col-span-1"
             >
               <CardMoney revenue="Pagamentos" value={totalExpensesValue} />
@@ -165,7 +165,7 @@ export function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="col-span-1"
             >
               <CardPaymentMethod revenue="Fatura" value={totalExpensesCredit} />
@@ -173,7 +173,7 @@ export function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               className="col-span-1"
             >
               <CardPaymentMethod revenue="Débito" value={totalExpenseDebit} />
@@ -185,7 +185,7 @@ export function App() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 className="col-span-2"
               >
                 <CardChart />
@@ -193,7 +193,7 @@ export function App() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
                 className="col-span-2"
               >
                 <CardChartPayments />
@@ -203,7 +203,7 @@ export function App() {
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
               className="col-span-4"
             >
               <ExpenseTable />
