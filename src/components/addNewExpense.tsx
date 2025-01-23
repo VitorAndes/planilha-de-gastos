@@ -1,16 +1,16 @@
-import { getBalance, getTotalExpenses } from "@/functions/balanceAndExpenses";
-import { handleCreateExpense } from "@/functions/expenseAndBalanceHandlers";
-import type { ExpenseData } from "@/types/Types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { CircleDollarSign } from "lucide-react";
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Button } from "./ui/button";
+import { getBalance, getTotalExpenses } from '@/functions/balanceAndExpenses'
+import { handleCreateExpense } from '@/functions/expenseAndBalanceHandlers'
+import type { ExpenseData } from '@/types/Types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
+import { CircleDollarSign } from 'lucide-react'
+import { useState } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+import { Controller, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
+import { Button } from './ui/button'
 import {
   Dialog,
   DialogContent,
@@ -19,8 +19,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./ui/dialog";
-import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+} from './ui/dialog'
+import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 import {
   Select,
   SelectContent,
@@ -29,31 +29,31 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from './ui/select'
 
 const createUserFormSchema = z.object({
   local: z
     .string()
-    .nonempty("O campo local é obrigatório")
-    .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, "Apenas letras são permitidas"),
+    .nonempty('O campo local é obrigatório')
+    .regex(/^[a-zA-ZÀ-ÿ\s\.,'-]+$/, 'Apenas letras são permitidas'),
   expense: z
     .string()
-    .nonempty("O campo valor é obrigatório")
+    .nonempty('O campo valor é obrigatório')
     .regex(
       /^-?\d+([.,]\d+)?$/,
-      "Deve ser um número válido e sem letras, exemplo: 333,33"
+      'Deve ser um número válido e sem letras, exemplo: 333,33'
     ),
-  tag: z.string().nonempty("O campo tag é obrigatório"),
-  paymentMethod: z.enum(["crédito", "débito", "dinheiro"]),
-  paymentDate: z.string().nonempty("O campo data é obrigatório"),
-});
+  tag: z.string().nonempty('O campo tag é obrigatório'),
+  paymentMethod: z.enum(['crédito', 'débito', 'dinheiro']),
+  paymentDate: z.string().nonempty('O campo data é obrigatório'),
+})
 
-type createUserFormData = z.infer<typeof createUserFormSchema>;
+type createUserFormData = z.infer<typeof createUserFormSchema>
 
 interface AddNewExpenseProps {
-  setExpense: React.Dispatch<React.SetStateAction<ExpenseData[]>>;
-  updateBalance: (newExpense: number) => void;
-  addNewExpense: (newExpense: createUserFormData) => void;
+  setExpense: React.Dispatch<React.SetStateAction<ExpenseData[]>>
+  updateBalance: (newExpense: number) => void
+  addNewExpense: (newExpense: createUserFormData) => void
 }
 
 export function AddNewExpense({
@@ -69,36 +69,33 @@ export function AddNewExpense({
     formState: { errors },
   } = useForm<createUserFormData>({
     resolver: zodResolver(createUserFormSchema),
-  });
-  const [startDate, setStartDate] = useState<Date | null>(null);
+  })
+  const [startDate, setStartDate] = useState<Date | null>(null)
   const onSubmit = (data: createUserFormData) => {
-    const balance = getBalance();
+    const balance = getBalance()
+    const expense = Number.parseFloat(data.expense.replace(',', '.'))
 
     switch (data.paymentMethod) {
-      case "crédito":
-        toast.success("Novo gasto foi adicionado!");
+      case 'crédito':
+        toast.success('Novo gasto foi adicionado!')
 
-        break;
-      case "débito":
-        if (Number.parseFloat(data.expense.replace(",", ".")) >= balance) {
-          toast.error(
-            "Não foi possivel finalizar a compra por falta de saldo."
-          );
-          return 0;
+        break
+      case 'débito':
+        if (expense >= balance) {
+          toast.error('Não foi possivel finalizar a compra por falta de saldo.')
+          return 0
         }
-        updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
-        toast.success("Novo gasto foi adicionado!");
+        updateBalance(expense)
+        toast.success('Novo gasto foi adicionado!')
 
-        break;
-      case "dinheiro":
-        if (Number.parseFloat(data.expense.replace(",", ".")) >= balance) {
-          toast.error(
-            "Não foi possivel finalizar a compra por falta de saldo."
-          );
-          return 0;
+        break
+      case 'dinheiro':
+        if (expense >= balance) {
+          toast.error('Não foi possivel finalizar a compra por falta de saldo.')
+          return 0
         }
-        updateBalance(Number.parseFloat(data.expense.replace(",", ".")));
-        break;
+        updateBalance(expense)
+        break
     }
 
     handleCreateExpense(
@@ -107,21 +104,21 @@ export function AddNewExpense({
       data.local,
       data.paymentMethod,
       data.paymentDate
-    );
+    )
 
-    const newTotal = getTotalExpenses();
-    setExpense(newTotal);
+    const newTotal = getTotalExpenses()
+    setExpense(newTotal)
 
-    addNewExpense(data);
+    addNewExpense(data)
 
-    reset();
-  };
+    reset()
+  }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant={"link"}
+          variant={'link'}
           className="text-sm md:text-lg flex flex-col gap-2 transition-all"
         >
           <CircleDollarSign
@@ -150,7 +147,7 @@ export function AddNewExpense({
                 className="rounded-lg p-2 w-full text-black"
                 type="text"
                 placeholder="Digite com o que gastou..."
-                {...register("local")}
+                {...register('local')}
               />
               {errors.local && (
                 <span className="text-red-600">{errors.local.message}</span>
@@ -196,7 +193,7 @@ export function AddNewExpense({
                 className="rounded-lg p-2 w-full text-black"
                 type="text"
                 placeholder="Digite quanto gastou..."
-                {...register("expense")}
+                {...register('expense')}
               />
               {errors.expense && (
                 <span className="text-red-600">{errors.expense.message}</span>
@@ -212,7 +209,7 @@ export function AddNewExpense({
                   <RadioGroup
                     {...field}
                     className="flex justify-center"
-                    onValueChange={(value) => field.onChange(value)}
+                    onValueChange={value => field.onChange(value)}
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
@@ -253,7 +250,7 @@ export function AddNewExpense({
                 Data do pagamento
               </label>
               <Controller
-                {...register("paymentDate")}
+                {...register('paymentDate')}
                 control={control}
                 render={({ field }) => (
                   <DatePicker
@@ -261,8 +258,8 @@ export function AddNewExpense({
                     id="date"
                     selected={startDate}
                     onChange={(date: Date | null) => {
-                      setStartDate(date);
-                      field.onChange(date ? format(date, "dd/MM/yyyy") : "");
+                      setStartDate(date)
+                      field.onChange(date ? format(date, 'dd/MM/yyyy') : '')
                     }}
                     dateFormat="dd/MM/yyyy"
                   />
@@ -286,5 +283,5 @@ export function AddNewExpense({
         </form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

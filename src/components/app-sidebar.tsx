@@ -3,14 +3,10 @@ import {
   Home,
   Instagram,
   Linkedin,
-  LogIn,
-  LogOut,
   Moon,
-  Receipt,
   Settings,
   Sun,
-  Table,
-} from "lucide-react";
+} from 'lucide-react'
 
 import {
   Sidebar,
@@ -22,45 +18,27 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { useTheme } from "@/context/ThemeContext";
-import { Button } from "./ui/button";
+} from '@/components/ui/sidebar'
+import { useTheme } from '@/context/ThemeContext'
+import { Button } from './ui/button'
 
 const navigationItem = [
   {
-    title: "Home",
-    url: "/",
+    title: 'Home',
+    url: '/',
     icon: Home,
   },
-  {
-    title: "Planejador",
-    url: "/",
-    icon: Table,
-  },
-  {
-    title: "Dívidas",
-    url: "/",
-    icon: Receipt,
-  },
-];
+]
 
 const clientHandleItem = [
   {
-    title: "LogIn",
-    icon: LogIn,
-  },
-  {
-    title: "LogOut",
-    icon: LogOut,
-  },
-  {
-    title: "Settings",
+    title: 'Settings',
     icon: Settings,
   },
-];
+]
 
 export function AppSidebar() {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme()
   return (
     <Sidebar>
       <SidebarContent className="flex flex-col justify-between">
@@ -70,10 +48,10 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItem.map((item) => (
+              {navigationItem.map(item => (
                 <SidebarMenuItem
                   key={item.title}
-                  className="text-color-secondary mb-1"
+                  className="text-color-primary mb-1"
                 >
                   <SidebarMenuButton asChild>
                     <a href={item.url} aria-disabled>
@@ -84,10 +62,10 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
               <span className="border-b my-2 border-color-secondary" />
-              {clientHandleItem.map((item) => (
+              {clientHandleItem.map(item => (
                 <SidebarMenuItem
                   key={item.title}
-                  className="text-color-secondary mb-1"
+                  className="text-color-primary mb-1"
                 >
                   <SidebarMenuButton asChild>
                     <a href="/" aria-disabled>
@@ -101,33 +79,33 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarFooter className="flex flex-row items-center justify-between">
-          <ul className="flex items-center text-color-secondary w-full gap-4 ">
+          <ul className="flex items-center text-color-accent w-full gap-4 ">
             <li className="hover:text-sky-500 hover:scale-110 transition-all">
               <a href="https://www.linkedin.com/in/vitor-andes-dos-santos-3265ba243/">
-                <Linkedin size={32} className="" />
+                <Linkedin size={24} className="" />
               </a>
             </li>
             <li className="hover:text-violet-500 hover:scale-110 transition-all">
               <a href="https://github.com/VitorAndes">
-                <Github size={32} className="" />
+                <Github size={24} className="" />
               </a>
             </li>
             <li className="hover:text-rose-500 hover:scale-110 transition-all">
               <a href="https://www.instagram.com/vtr_andes/">
-                <Instagram size={32} className="" />
+                <Instagram size={24} className="" />
               </a>
             </li>
           </ul>
           <Button
-            variant={"secondary"}
+            variant={'secondary'}
             type="button"
             onClick={toggleTheme}
             className="hover:scale-110 dark:hover:text-yellow-500 hover:text-color-text transition-all"
           >
-            {theme === "dark" ? <Sun size={32} /> : <Moon size={32} />}
+            {theme === 'dark' ? <Sun size={24} /> : <Moon size={24} />}
           </Button>
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>
-  );
+  )
 }

@@ -41,12 +41,12 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --text: #020d0b;
-    --background-body: #e9e6f4;
+    --text: #0e0915;
+    --background-body: #ebe4f7;
     --background-card: #eeeef1;
-    --primary: #d1faf9;
-    --secondary: #063228;
-    --accent: #02443d;
+    --primary: #401b79;
+    --secondary: #a171ea;
+    --accent: #6511e4;
   }
 
   .dark {
@@ -82,13 +82,13 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --text: #f2fdfb;
-    --background-body: #0e0b19;
+    --text: #efeaf6;
+    --background-body: #0f021b;
+    --background-card: #0e071a;
 
-    --background-card: #0e0e11;
-    --primary: #052e2d;
-    --secondary: #cdf9ef;
-    --accent: #119285;
+    --primary: #ac86e4;
+    --secondary: #46158e;
+    --accent: #701bee;
   }
 }
 @layer base {

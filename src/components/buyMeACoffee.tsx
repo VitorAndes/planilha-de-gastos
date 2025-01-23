@@ -1,16 +1,16 @@
-import { Coffee } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "./ui/button";
+import { Coffee } from 'lucide-react'
+import { toast } from 'sonner'
+import { Button } from './ui/button'
 
 export function BuyMeACoffee() {
   function commingSoon() {
-    toast.info("disponivel em breve.");
+    toast.info('disponivel em breve.')
   }
   return (
     <Button
-      variant={"outline"}
+      variant={'outline'}
       onClick={commingSoon}
-      className="md:text-lg text-color-text dark:bg-color-accent bg-color-primary md:p-6 transition-all"
+      className="md:text-lg text-color-text dark:bg-color-accent bg-color-secondary md:p-6 transition-all"
     >
       <a
         className="flex items-center gap-2"
@@ -23,5 +23,5 @@ export function BuyMeACoffee() {
         Buy me a coffee <Coffee />
       </a>
     </Button>
-  );
+  )
 }

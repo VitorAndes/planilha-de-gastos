@@ -1,7 +1,7 @@
-import { getAllExpenses } from "@/functions/balanceAndExpenses";
-import { useState } from "react";
-import { ExpenseTableFilters } from "./expenseTableFilters";
-import { Card } from "./ui/card";
+import { getAllExpenses } from '@/functions/balanceAndExpenses'
+import { useState } from 'react'
+import { ExpenseTableFilters } from './expenseTableFilters'
+import { Card } from './ui/card'
 import {
   Table,
   TableBody,
@@ -9,10 +9,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./ui/table";
+} from './ui/table'
 
 export function ExpenseTable() {
-  const [filteredExpenses, setFilteredExpenses] = useState(getAllExpenses());
+  const [filteredExpenses, setFilteredExpenses] = useState(getAllExpenses())
 
   return (
     <Card className="py-4 flex flex-col rounded-md gap-2 flex-1 h-full  ">
@@ -30,7 +30,7 @@ export function ExpenseTable() {
             <TableHead className="flex-1">Data de pagamento</TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody className="text-color-secondary">
+        <TableBody className="text-color-primary">
           {filteredExpenses.map(
             ({ expense, local, tag, paymentMethod, paymentDate }, index) => (
               // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
@@ -43,16 +43,16 @@ export function ExpenseTable() {
                 </TableCell>
                 <TableCell className="flex-1">
                   <span className="font-regular text-base text-red-600">
-                    ${expense.replace(".", ",")}
+                    ${expense.replace('.', ',')}
                   </span>
                 </TableCell>
-                {paymentMethod === "débito" ? (
+                {paymentMethod === 'débito' ? (
                   <TableCell className="flex-1">
                     <span className="font-regular text-base text-cyan-600">
                       {paymentMethod}
                     </span>
                   </TableCell>
-                ) : paymentMethod === "crédito" ? (
+                ) : paymentMethod === 'crédito' ? (
                   <TableCell className="flex-1">
                     <span className="font-regular text-base text-indigo-600">
                       {paymentMethod}
@@ -74,5 +74,5 @@ export function ExpenseTable() {
         </TableBody>
       </Table>
     </Card>
-  );
+  )
 }

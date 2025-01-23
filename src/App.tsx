@@ -1,77 +1,77 @@
-import { useCallback, useState } from "react";
-import { AddNewBalance } from "./components/addNewBalance";
-import { AddNewExpense } from "./components/addNewExpense";
+import { useCallback, useState } from 'react'
+import { AddNewBalance } from './components/addNewBalance'
+import { AddNewExpense } from './components/addNewExpense'
 
-import { motion } from "framer-motion";
-import { toast } from "sonner";
-import { BuyMeACoffee } from "./components/buyMeACoffee";
-import { CardChart } from "./components/cardChart";
-import { CardChartPayments } from "./components/cardChartPayments";
-import { CardMoney } from "./components/cardMoney";
-import { CardPaymentMethod } from "./components/cardPaymentMethod";
-import { CardResetData } from "./components/cardResetData";
-import { ExpenseTable } from "./components/expenseTable";
-import { SidebarTrigger } from "./components/ui/sidebar";
+import { motion } from 'framer-motion'
+import { toast } from 'sonner'
+import { BuyMeACoffee } from './components/buyMeACoffee'
+import { CardChart } from './components/cardChart'
+import { CardChartPayments } from './components/cardChartPayments'
+import { CardMoney } from './components/cardMoney'
+import { CardPaymentMethod } from './components/cardPaymentMethod'
+import { CardResetData } from './components/cardResetData'
+import { ExpenseTable } from './components/expenseTable'
+import { SidebarTrigger } from './components/ui/sidebar'
 import {
   getAllExpenses,
   getTotalExpenses,
-} from "./functions/balanceAndExpenses";
-import type { ExpenseData, ExpenseType } from "./types/Types";
+} from './functions/balanceAndExpenses'
+import type { ExpenseData, ExpenseType } from './types/Types'
 
 export function useLocalStorageState(key: string, initialValue = 0) {
   const [value, setValue] = useState(() => {
-    const stored = localStorage.getItem(key);
-    return stored ? Number.parseFloat(stored) : initialValue;
-  });
+    const stored = localStorage.getItem(key)
+    return stored ? Number.parseFloat(stored) : initialValue
+  })
 
   const updateValue = useCallback(
     (amount: number) => {
-      setValue((prev) => {
-        const newValue = prev + amount;
-        localStorage.setItem(key, newValue.toString());
-        return newValue;
-      });
+      setValue(prev => {
+        const newValue = prev + amount
+        localStorage.setItem(key, newValue.toString())
+        return newValue
+      })
     },
     [key]
-  );
+  )
 
-  return [value, setValue, updateValue] as const;
+  return [value, setValue, updateValue] as const
 }
 
 export function useExpenses() {
   const [expenses, setExpenses] = useState<ExpenseData[]>(() =>
     getTotalExpenses()
-  );
+  )
   const [expensesList, setExpensesList] = useState<ExpenseType[]>(() =>
     getAllExpenses()
-  );
+  )
 
   const addExpense = useCallback((newExpense: ExpenseType) => {
-    setExpensesList((prev) => [...prev, newExpense]);
-  }, []);
+    setExpensesList(prev => [...prev, newExpense])
+  }, [])
 
   const refreshExpenses = useCallback(() => {
-    setExpenses(getTotalExpenses());
-    setExpensesList(getAllExpenses());
-  }, []);
+    setExpenses(getTotalExpenses())
+    setExpensesList(getAllExpenses())
+  }, [])
 
   const calculateTotalExpenses = useCallback(() => {
     return expenses
-      .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
+      .reduce((sum, item) => sum + Number(item.expense.replace(',', '.')), 0)
       .toFixed(2)
-      .replace(".", ",");
-  }, [expenses]);
+      .replace('.', ',')
+  }, [expenses])
 
   const calculateExpensesByType = useCallback(
     (type: string) => {
       return expenses
-        .filter((item) => item.paymentMethod === type)
-        .reduce((sum, item) => sum + Number(item.expense.replace(",", ".")), 0)
+        .filter(item => item.paymentMethod === type)
+        .reduce((sum, item) => sum + Number(item.expense.replace(',', '.')), 0)
         .toFixed(2)
-        .replace(".", ",");
+        .replace('.', ',')
     },
     [expenses]
-  );
+  )
 
   return {
     setExpenses,
@@ -80,12 +80,12 @@ export function useExpenses() {
     refreshExpenses,
     calculateTotalExpenses,
     calculateExpensesByType,
-  };
+  }
 }
 
 // App.tsx
 export function App() {
-  const [balance, setBalance, updateBalance] = useLocalStorageState("balance");
+  const [balance, setBalance, updateBalance] = useLocalStorageState('balance')
 
   const {
     setExpenses,
@@ -93,26 +93,26 @@ export function App() {
     refreshExpenses,
     calculateTotalExpenses,
     calculateExpensesByType,
-  } = useExpenses();
+  } = useExpenses()
 
   const handleResetData = useCallback(() => {
-    localStorage.clear();
-    setBalance(0);
-    setExpenses([]);
-    refreshExpenses();
-    toast.success("Os dados foram resetados");
-  }, [setBalance, setExpenses, refreshExpenses]);
+    localStorage.clear()
+    setBalance(0)
+    setExpenses([])
+    refreshExpenses()
+    toast.success('Os dados foram resetados')
+  }, [setBalance, setExpenses, refreshExpenses])
 
   const descountBalance = useCallback(
     (amount: number) => {
-      updateBalance(-amount);
+      updateBalance(-amount)
     },
     [updateBalance]
-  );
+  )
 
-  const totalExpensesValue = calculateTotalExpenses();
-  const totalExpensesCredit = calculateExpensesByType("crédito");
-  const totalExpenseDebit = calculateExpensesByType("débito");
+  const totalExpensesValue = calculateTotalExpenses()
+  const totalExpensesCredit = calculateExpensesByType('crédito')
+  const totalExpenseDebit = calculateExpensesByType('débito')
 
   return (
     <div className="flex justify-center gap-2 w-full min-h-screen ">
@@ -121,7 +121,7 @@ export function App() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex items-center justify-between bg-color-card shadow-md shadow-color-secondary w-full md:h-24 md:rounded-lg p-4 mb-8  "
+          className="flex items-center justify-between bg-color-card shadow shadow-color-secondary w-full md:h-24 md:rounded-lg p-4 mb-8  "
         >
           <SidebarTrigger className="md:hidden" />
           <motion.div
@@ -151,7 +151,7 @@ export function App() {
             >
               <CardMoney
                 revenue="Saldo"
-                value={balance.toFixed(2).replace(".", ",")}
+                value={balance.toFixed(2).replace('.', ',')}
               />
             </motion.div>
             <motion.div
@@ -212,5 +212,5 @@ export function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
